@@ -59,22 +59,23 @@ class LocationSeeder extends Seeder
             ]);
         }
 
-        // Barrios para Resistencia
+        // Barrios para Villa Ángela
+        $villaAngelaIndex = array_search('Villa Ángela', array_column($cities, 'name'));
         $neighborhoods = [
             'Centro',
-            'Villa Don Alberto',
             'Barrio Norte',
-            'Villa Libertad',
-            'Barrio Güemes',
-            'Villa San Martín',
-            'Barrio Toba',
-            'Villa Río Negro',
+            'Barrio Sur',
+            'Villa Progreso',
+            'Barrio Obrero',
+            'Villa Nueva',
+            'Barrio Industrial',
+            'Villa Esperanza',
         ];
 
         foreach ($neighborhoods as $neighborhood) {
             DB::table('neighborhoods')->insert([
                 'neighborhood_id' => Str::uuid(),
-                'city_id' => $cityIds[0], // Resistencia
+                'city_id' => $cityIds[$villaAngelaIndex], // Villa Ángela
                 'name' => $neighborhood,
                 'created_at' => now(),
                 'updated_at' => now(),
