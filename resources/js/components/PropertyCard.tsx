@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Link } from "@inertiajs/react"
 import { MapPin, Bed, Bath, Square } from "lucide-react"
 
 interface Property {
@@ -45,7 +46,8 @@ export function PropertyCard({ property }: PropertyCardProps) {
   }
 
   return (
-    <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group border-0 shadow-md p-0">
+    <Link href={`/propiedad/${property.listing_id}`}>
+      <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group border-0 shadow-md p-0">
       <div className="relative overflow-hidden">
         <div className="aspect-[4/3] w-full">
           <img 
@@ -135,6 +137,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </div>
         </div>
       </CardContent>
-    </Card>
+      </Card>
+    </Link>
   )
 }

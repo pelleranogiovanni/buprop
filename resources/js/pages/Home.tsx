@@ -2,6 +2,7 @@ import { Head } from '@inertiajs/react'
 import { PropertyFilters } from '@/components/PropertyFilters'
 import { PropertyGrid } from '@/components/PropertyGrid'
 import { Navbar } from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
 
 interface Neighborhood {
   neighborhood_id: string
@@ -55,7 +56,7 @@ export default function Home({ listings, neighborhoods, filters }: HomeProps) {
     <>
       <Head title="Mi Alquiler - Encuentra tu hogar ideal" />
       
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
         
         {/* Hero Section */}
@@ -78,9 +79,11 @@ export default function Home({ listings, neighborhoods, filters }: HomeProps) {
         </div>
         
         {/* Results Section */}
-        <div className="container mx-auto px-6 py-8 lg:py-12">
+        <div className="container mx-auto px-6 py-8 lg:py-12 flex-1">
           <PropertyGrid listings={listings} />
         </div>
+        
+        <Footer />
       </div>
     </>
   )
