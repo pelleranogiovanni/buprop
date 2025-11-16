@@ -19,7 +19,10 @@ class HomeController extends Controller
         return Inertia::render('Home', [
             'listings' => $listings,
             'neighborhoods' => $neighborhoods,
-            'filters' => $filters
+            'filters' => $filters,
+            'auth' => [
+                'user' => auth()->user() ? auth()->user()->load('roles') : null
+            ]
         ]);
     }
 }

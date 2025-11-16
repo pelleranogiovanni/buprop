@@ -38,6 +38,18 @@ interface PaginatedListings {
   }>
 }
 
+
+
+interface AuthProps {
+  user?: {
+    id: number
+    name: string
+    email: string
+    avatar_url?: string
+    roles?: Array<{ name: string }>
+  } | null
+}
+
 interface HomeProps {
   listings: PaginatedListings
   neighborhoods: Neighborhood[]
@@ -49,15 +61,16 @@ interface HomeProps {
     max_price?: string
     bedrooms?: string
   }
+  auth: AuthProps
 }
 
-export default function Home({ listings, neighborhoods, filters }: HomeProps) {
+export default function Home({ listings, neighborhoods, filters, auth }: HomeProps) {
   return (
     <>
       <Head title="Mi Alquiler - Encuentra tu hogar ideal" />
       
       <div className="min-h-screen bg-background flex flex-col">
-        <Navbar />
+        <Navbar user={auth?.user} />
         
         {/* Hero Section */}
         <div className="bg-background border-b">

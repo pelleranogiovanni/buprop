@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/ui/logo"
 import { NavLink } from "@/components/ui/nav-link"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { UserMenu } from "@/components/UserMenu"
+import { Link } from "@inertiajs/react"
 import { Menu, User, Heart, Plus } from "lucide-react"
 import { useState } from "react"
 
@@ -10,6 +12,7 @@ interface NavbarProps {
     id: number
     name: string
     email: string
+    roles?: Array<{ name: string }>
   } | null
 }
 
@@ -47,26 +50,33 @@ export function Navbar({ user }: NavbarProps) {
           <div className="hidden md:flex items-center space-x-3">
             {user ? (
               <>
-                <Button variant="ghost" size="sm" className="text-muted-foreground">
-                  <Heart className="w-4 h-4 mr-2" />
-                  Favoritos
+                <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                  <Link href="/favoritos">
+                    <Heart className="w-4 h-4 mr-2" />
+                    Favoritos
+                  </Link>
                 </Button>
-                <Button variant="outline" size="sm">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Publicar
-                </Button>
-                <Button variant="ghost" size="sm" className="text-muted-foreground">
-                  <User className="w-4 h-4 mr-2" />
-                  {user.name}
-                </Button>
+                {(user.roles?.some(role => ['owner', 'agency'].includes(role.name))) && (
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/publicar">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Publicar
+                    </Link>
+                  </Button>
+                )}
+                <UserMenu user={user} />
               </>
             ) : (
               <>
-                <Button variant="ghost" size="sm">
-                  Iniciar sesión
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/login">
+                    Iniciar sesión
+                  </Link>
                 </Button>
-                <Button size="sm">
-                  Registrarse
+                <Button size="sm" asChild>
+                  <Link href="/register">
+                    Registrarse
+                  </Link>
                 </Button>
               </>
             )}
@@ -98,26 +108,46 @@ export function Navbar({ user }: NavbarProps) {
                 <div className="border-t pt-4 space-y-2">
                   {user ? (
                     <>
-                      <Button variant="ghost" className="w-full justify-start">
-                        <Heart className="w-4 h-4 mr-2" />
-                        Favoritos
+                      <Button variant="ghost" className="w-full justify-start" asChild>
+                        <Link href="/favoritos">
+                          <Heart className="w-4 h-4 mr-2" />
+                          Favoritos
+                        </Link>
                       </Button>
-                      <Button variant="outline" className="w-full justify-start">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Publicar propiedad
+                      {(user.roles?.some(role => ['owner', 'agency'].includes(role.name))) && (
+                        <Button variant="outline" className="w-full justify-start" asChild>
+                          <Link href="/publicar">
+                            <Plus className="w-4 h-4 mr-2" />
+                            Publicar propiedad
+                          </Link>
+                        </Button>
+                      )}
+                      <Button variant="ghost" className="w-full justify-start" asChild>
+                        <Link href="/perfil">
+                          <User className="w-4 h-4 mr-2" />
+                          Mi perfil
+                        </Link>
                       </Button>
-                      <Button variant="ghost" className="w-full justify-start">
+                      <Button 
+                        variant="ghost" 
+                        className="w-full justify-start text-destructive hover:text-destructive"
+                        onClick={() => window.location.href = '/logout'}
+                      >
                         <User className="w-4 h-4 mr-2" />
-                        Mi perfil
+                        Cerrar sesión
                       </Button>
                     </>
                   ) : (
                     <>
-                      <Button variant="ghost" className="w-full">
-                        Iniciar sesión
+                      <Button variant="ghost" className="w-full" asChild>
+                        <Link href="/login">
+                          Iniciar sesión
+                        </Link>
                       </Button>
-                      <Button className="w-full">
-                        Registrarse
+                      <Button className="w-full" asChild>
+                        <Link href="/register">
+                          Registrarse
+                        </Link>
                       </Button>
                     </>
                   )}
