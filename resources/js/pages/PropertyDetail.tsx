@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react'
 import { Navbar } from '@/components/Navbar'
 import { PropertyImageGallery } from '@/components/PropertyImageGallery'
 import { PropertyInfo } from '@/components/PropertyInfo'
-import { ContactForm } from '@/components/ContactForm'
+import { ContactSection } from '@/components/ContactForm'
 import { PropertyMap } from '@/components/PropertyMap'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
@@ -86,7 +86,8 @@ export default function PropertyDetail({ property }: PropertyDetailProps) {
 
             {/* Columna derecha - Formulario de contacto */}
             <div className="lg:col-span-1">
-              <ContactForm
+              <ContactSection
+                listingId={property.listing_id}
                 publisherName={property.publisher_name}
                 publisherPhone={property.publisher_phone}
               />

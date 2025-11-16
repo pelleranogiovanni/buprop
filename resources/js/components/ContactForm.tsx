@@ -3,15 +3,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { VisitRequestForm } from "@/components/VisitRequestForm"
 import { Phone, Mail, MessageCircle } from "lucide-react"
 import { useState } from "react"
 
 interface ContactFormProps {
+  listingId: string
   publisherName: string
   publisherPhone?: string
 }
 
-export function ContactForm({ publisherName, publisherPhone }: ContactFormProps) {
+export function ContactForm({ listingId, publisherName, publisherPhone }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,7 +28,7 @@ export function ContactForm({ publisherName, publisherPhone }: ContactFormProps)
   }
 
   return (
-    <Card className="sticky top-6">
+    <Card>
       <CardHeader>
         <CardTitle className="text-lg">Contactar</CardTitle>
         <p className="text-sm text-muted-foreground">
@@ -114,5 +116,28 @@ export function ContactForm({ publisherName, publisherPhone }: ContactFormProps)
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+interface ContactSectionProps {
+  listingId: string
+  publisherName: string
+  publisherPhone?: string
+}
+
+export function ContactSection({ listingId, publisherName, publisherPhone }: ContactSectionProps) {
+  return (
+    <div className="space-y-6 sticky top-6">
+      <ContactForm
+        listingId={listingId}
+        publisherName={publisherName}
+        publisherPhone={publisherPhone}
+      />
+      
+      <VisitRequestForm
+        listingId={listingId}
+        publisherName={publisherName}
+      />
+    </div>
   )
 }
