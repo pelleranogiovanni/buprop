@@ -16,10 +16,14 @@ Route::post('/logout', function() {
     return redirect()->route('home');
 })->name('logout');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+// Protected routes
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/publicar', [\App\Http\Controllers\PublishController::class, 'create'])->name('publish.create');
+    Route::post('/publicar', [\App\Http\Controllers\PublishController::class, 'store'])->name('publish.store');
+    Route::patch('/listings/{listing}/moderation', [\App\Http\Controllers\DashboardController::class, 'updateModeration'])->name('listings.moderation');
 });
+
+
 
 require __DIR__.'/settings.php';
