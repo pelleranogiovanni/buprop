@@ -21,7 +21,10 @@ class PublishController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        try {
+            \Log::info('Datos recibidos:', $request->all());
+            
+            $request->validate([
             'property_type' => 'required|in:house,apartment,commercial',
             'address' => 'required|string|max:255',
             'neighborhood_id' => 'required|exists:neighborhoods,neighborhood_id',
@@ -35,6 +38,9 @@ class PublishController extends Controller
             'price' => 'required|numeric|min:1',
             'currency' => 'required|in:ARS,USD',
             'requirements' => 'nullable|string',
+            'images' => 'required|array|min:1|max:5',
+            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+            'cover_image_index' => 'integer|min:0',
         ]);
 
         $villaAngelaCityId = DB::table('cities')->where('name', 'Villa Ángela')->first()->city_id;
@@ -58,6 +64,26 @@ class PublishController extends Controller
             'updated_at' => now(),
         ]);
 
+        // Guardar imágenes
+        if ($request->hasFile('images')) {
+            $coverIndex = (int)($request->cover_image_index ?? 0);
+            
+            foreach ($request->file('images') as $index => $image) {
+                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('properties', $filename, 'public');
+                
+                DB::table('property_images')->insert([
+                    'image_id' => Str::uuid(),
+                    'property_id' => $propertyId,
+                    'url' => '/storage/' . $path,
+                    'sort_order' => $index + 1,
+                    'is_cover' => $index === $coverIndex,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+
         // Crear listing
         DB::table('listings')->insert([
             'listing_id' => Str::uuid(),
@@ -68,13 +94,18 @@ class PublishController extends Controller
             'currency' => $request->currency,
             'availability_status' => 'available',
             'moderation_status' => 'pending',
-            'requirements' => $request->requirements,
+            'requirements' => $request->requirements ?: 'Sin requisitos específicos',
             'available_from' => now(),
             'allow_messages' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Propiedad publicada exitosamente. Está pendiente de moderación.');
+            return redirect()->route('dashboard')->with('success', 'Propiedad publicada exitosamente. Está pendiente de moderación.');
+        } catch (\Exception $e) {
+            \Log::error('Error al crear propiedad: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            return back()->withErrors(['error' => 'Error al crear la propiedad: ' . $e->getMessage()]);
+        }
     }
 }

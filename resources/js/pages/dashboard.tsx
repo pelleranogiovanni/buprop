@@ -22,6 +22,7 @@ interface Listing {
   city_name: string
   neighborhood_name?: string
   publisher_name?: string
+  cover_image?: string
 }
 
 interface User {
@@ -175,15 +176,26 @@ export default function Dashboard({ listings = [], auth }: DashboardProps) {
                         {listings.map((listing) => (
                           <tr key={listing.listing_id} className="border-b hover:bg-accent/50">
                             <td className="p-4">
-                              <div>
-                                <div className="font-semibold">
-                                  {getPropertyTypeLabel(listing.property_type)} - {getOperationTypeLabel(listing.operation_type)}
-                                </div>
-                                <div className="text-sm text-muted-foreground">
-                                  {listing.address}, {listing.city_name}
-                                </div>
-                                <div className="text-xs text-muted-foreground">
-                                  {listing.bedrooms} dorm • {listing.bathrooms} baños • {listing.covered_m2}m²
+                              <div className="flex items-center gap-3">
+                                {listing.cover_image && (
+                                  <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted flex-shrink-0">
+                                    <img
+                                      src={listing.cover_image}
+                                      alt="Portada"
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                )}
+                                <div>
+                                  <div className="font-semibold">
+                                    {getPropertyTypeLabel(listing.property_type)} - {getOperationTypeLabel(listing.operation_type)}
+                                  </div>
+                                  <div className="text-sm text-muted-foreground">
+                                    {listing.address}, {listing.city_name}
+                                  </div>
+                                  <div className="text-xs text-muted-foreground">
+                                    {listing.bedrooms} dorm • {listing.bathrooms} baños • {listing.covered_m2}m²
+                                  </div>
                                 </div>
                               </div>
                             </td>

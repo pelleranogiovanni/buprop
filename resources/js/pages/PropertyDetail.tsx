@@ -28,6 +28,11 @@ interface Property {
   owner_name: string
   publisher_name: string
   publisher_phone?: string
+  images?: Array<{
+    url: string
+    is_cover: boolean
+    sort_order: number
+  }>
 }
 
 interface PropertyDetailProps {
@@ -79,6 +84,7 @@ export default function PropertyDetail({ property }: PropertyDetailProps) {
                 listingId={property.listing_id}
                 propertyType={property.property_type}
                 cityName={property.city_name}
+                images={property.images}
               />
               
               <PropertyInfo property={property} />

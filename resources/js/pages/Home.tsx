@@ -23,6 +23,7 @@ interface Property {
   city_name: string
   neighborhood_name?: string
   publisher_name: string
+  cover_image?: string
 }
 
 interface PaginatedListings {

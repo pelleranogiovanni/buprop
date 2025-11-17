@@ -6,15 +6,22 @@ interface PropertyImageGalleryProps {
   listingId: string
   propertyType: string
   cityName: string
+  images?: Array<{
+    url: string
+    is_cover: boolean
+    sort_order: number
+  }>
 }
 
-export function PropertyImageGallery({ listingId, propertyType, cityName }: PropertyImageGalleryProps) {
+export function PropertyImageGallery({ listingId, propertyType, cityName, images: dbImages }: PropertyImageGalleryProps) {
   const [currentImage, setCurrentImage] = useState(0)
   
-  // Generar 5 imágenes usando Picsum con diferentes seeds
-  const images = Array.from({ length: 5 }, (_, index) => 
-    `https://picsum.photos/800/600?random=${listingId}-${index}`
-  )
+  // Usar imágenes de BD si existen, sino generar placeholders
+  const images = dbImages && dbImages.length > 0 
+    ? dbImages.map(img => img.url)
+    : Array.from({ length: 5 }, (_, index) => 
+        `https://picsum.photos/800/600?random=${listingId}-${index}`
+      )
 
   const nextImage = () => {
     setCurrentImage((prev) => (prev + 1) % images.length)

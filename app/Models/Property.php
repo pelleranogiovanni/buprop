@@ -52,4 +52,15 @@ class Property extends Model
     {
         return $this->hasMany(Listing::class, 'property_id', 'property_id');
     }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(PropertyImage::class, 'property_id', 'property_id');
+    }
+
+    public function coverImage()
+    {
+        return $this->hasOne(PropertyImage::class, 'property_id', 'property_id')
+                    ->where('is_cover', true);
+    }
 }

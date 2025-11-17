@@ -18,6 +18,10 @@ class DashboardController extends Controller
             ->join('cities', 'properties.city_id', '=', 'cities.city_id')
             ->leftJoin('neighborhoods', 'properties.neighborhood_id', '=', 'neighborhoods.neighborhood_id')
             ->join('users', 'listings.publisher_id', '=', 'users.id')
+            ->leftJoin('property_images', function($join) {
+                $join->on('properties.property_id', '=', 'property_images.property_id')
+                     ->where('property_images.is_cover', '=', true);
+            })
             ->select([
                 'listings.listing_id',
                 'listings.operation_type',
@@ -33,7 +37,8 @@ class DashboardController extends Controller
                 'properties.covered_m2',
                 'cities.name as city_name',
                 'neighborhoods.name as neighborhood_name',
-                'users.name as publisher_name'
+                'users.name as publisher_name',
+                'property_images.url as cover_image'
             ]);
         
         // Si no es admin, solo mostrar sus publicaciones

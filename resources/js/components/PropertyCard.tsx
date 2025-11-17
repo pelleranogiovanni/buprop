@@ -17,6 +17,7 @@ interface Property {
   city_name: string
   neighborhood_name?: string
   publisher_name: string
+  cover_image?: string
 }
 
 interface PropertyCardProps {
@@ -51,7 +52,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
       <div className="relative overflow-hidden">
         <div className="aspect-[4/3] w-full">
           <img 
-            src={`https://picsum.photos/400/300?random=${property.listing_id}`}
+            src={property.cover_image || `https://picsum.photos/400/300?random=${property.listing_id}`}
             alt={`${getPropertyTypeLabel(property.property_type)} en ${property.city_name}`}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"

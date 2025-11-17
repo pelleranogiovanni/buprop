@@ -14,6 +14,7 @@ class PropertyController extends Controller
             'property.city',
             'property.neighborhood', 
             'property.owner',
+            'property.images',
             'publisher'
         ])
         ->where('listing_id', $listingId)
@@ -41,6 +42,13 @@ class PropertyController extends Controller
             'owner_name' => $listing->property->owner->name,
             'publisher_name' => $listing->publisher->name,
             'publisher_phone' => $listing->publisher->phone,
+            'images' => $listing->property->images->map(function($image) {
+                return [
+                    'url' => $image->url,
+                    'is_cover' => $image->is_cover,
+                    'sort_order' => $image->sort_order
+                ];
+            })->sortBy('sort_order')->values()->toArray(),
         ];
 
         return Inertia::render('PropertyDetail', [

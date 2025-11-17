@@ -63,7 +63,7 @@ class Listing extends Model
 
     public static function getAvailableListings(array $filters = [])
     {
-        $query = self::with(['property.city', 'property.neighborhood', 'publisher:id,name'])
+        $query = self::with(['property.city', 'property.neighborhood', 'property.coverImage', 'publisher:id,name'])
             ->available()
             ->withFilters($filters);
             
@@ -103,6 +103,7 @@ class Listing extends Model
                 'city_name' => $listing->property->city->name,
                 'neighborhood_name' => $listing->property->neighborhood?->name,
                 'publisher_name' => $listing->publisher->name,
+                'cover_image' => $listing->property->coverImage?->url,
             ];
         });
         
