@@ -1,46 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
-import { Link, router } from "@inertiajs/react"
-import { Menu, Search, BarChart3 } from "lucide-react"
+import { Link } from "@inertiajs/react"
+import { Menu } from "lucide-react"
 import { useState } from "react"
-import { useCompare } from "@/contexts/CompareContext"
 
 const navItems = [
     { href: "/", label: "Inicio" },
     { href: "/propiedades", label: "Propiedades" },
-    { href: "/contacto", label: "Contacto" },
+    { href: "/publicar", label: "Publicar propiedad" },
 ]
-
-function HeaderSearchBar() {
-    const [query, setQuery] = useState("")
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (query.trim()) {
-            router.get("/", { q: query.trim() }, { preserveState: false })
-        }
-    }
-
-    return (
-        <form onSubmit={handleSubmit} className="hidden md:flex flex-1 max-w-xl">
-            <div className="flex items-center gap-2 w-full h-10 rounded-md border border-input bg-background px-4 text-sm text-muted-foreground focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/30 transition-all">
-                <Search className="size-4 shrink-0" />
-                <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Buscar propiedades en Villa Ángela..."
-                    className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
-                />
-            </div>
-        </form>
-    )
-}
 
 export function PublicHeader() {
     const [open, setOpen] = useState(false)
-    const { compareList } = useCompare()
 
     return (
         <header className="sticky top-0 z-50 w-full bg-card border-b border-border">
@@ -57,30 +28,16 @@ export function PublicHeader() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            className="text-sm text-[#475569] hover:text-foreground transition-colors"
                         >
                             {item.label}
                         </Link>
                     ))}
                 </nav>
 
-                {/* Search bar — desktop */}
-                <HeaderSearchBar />
-
                 {/* Actions — desktop */}
-                <div className="hidden md:flex items-center gap-3 shrink-0">
-                    <Link href="/comparador" className="relative">
-                        <Button variant="ghost" size="sm" className="gap-2">
-                            <BarChart3 className="size-4" />
-                            Comparar
-                        </Button>
-                        {compareList.length > 0 && (
-                            <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 text-[10px] flex items-center justify-center">
-                                {compareList.length}
-                            </Badge>
-                        )}
-                    </Link>
-                    <Button variant="ghost" size="sm" asChild>
+                <div className="ml-auto hidden md:flex items-center gap-3 shrink-0">
+                    <Button variant="secondary" size="sm" className="px-4 text-sm font-medium shadow-none" asChild>
                         <Link href="/login">Iniciar sesión</Link>
                     </Button>
                     <Button size="sm" asChild>
@@ -104,24 +61,11 @@ export function PublicHeader() {
                                         key={item.href}
                                         href={item.href}
                                         onClick={() => setOpen(false)}
-                                        className="px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                                        className="px-3 py-2 rounded-md text-sm text-[#475569] hover:text-foreground hover:bg-accent transition-colors"
                                     >
                                         {item.label}
                                     </Link>
                                 ))}
-                                <Link
-                                    href="/comparador"
-                                    onClick={() => setOpen(false)}
-                                    className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                                >
-                                    <BarChart3 className="size-4" />
-                                    Comparar
-                                    {compareList.length > 0 && (
-                                        <Badge className="ml-auto h-4 w-4 p-0 text-[10px] flex items-center justify-center">
-                                            {compareList.length}
-                                        </Badge>
-                                    )}
-                                </Link>
                                 <div className="border-t border-border mt-3 pt-3 flex flex-col gap-2">
                                     <Button variant="ghost" className="w-full justify-start" asChild>
                                         <Link href="/login" onClick={() => setOpen(false)}>

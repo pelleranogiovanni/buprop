@@ -1175,6 +1175,9 @@
               "name": "Header Público",
               "width": "fill_container",
               "descendants": {
+                "ZE5VE": {
+                  "width": "fill_container"
+                },
                 "xfYdW": {
                   "enabled": false
                 },
@@ -1594,7 +1597,8 @@
                               "fill": "$text-secondary",
                               "content": "Completado",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -1701,7 +1705,8 @@
                               "fill": "$text-muted",
                               "content": "Pendiente",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -10460,7 +10465,8 @@
                                       "fill": "$text-primary",
                                       "content": "1",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10482,7 +10488,8 @@
                                       "fill": "$text-primary",
                                       "content": "2",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10504,7 +10511,8 @@
                                       "fill": "$text-primary",
                                       "content": "3",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10526,7 +10534,8 @@
                                       "fill": "$text-primary",
                                       "content": "4",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10548,7 +10557,8 @@
                                       "fill": "$text-primary",
                                       "content": "5",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -10579,7 +10589,8 @@
                                       "fill": "$text-primary",
                                       "content": "6",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10601,7 +10612,8 @@
                                       "fill": "$text-primary",
                                       "content": "7",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10623,7 +10635,8 @@
                                       "fill": "$text-primary",
                                       "content": "8",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10645,7 +10658,8 @@
                                       "fill": "$text-primary",
                                       "content": "9",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10667,7 +10681,8 @@
                                       "fill": "$text-primary",
                                       "content": "10",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10689,7 +10704,8 @@
                                       "fill": "$text-primary",
                                       "content": "11",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10743,7 +10759,8 @@
                                       "fill": "$text-primary",
                                       "content": "13",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10765,7 +10782,8 @@
                                       "fill": "$text-primary",
                                       "content": "14",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10787,7 +10805,8 @@
                                       "fill": "$text-primary",
                                       "content": "15",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10809,7 +10828,8 @@
                                       "fill": "$text-primary",
                                       "content": "16",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10831,7 +10851,8 @@
                                       "fill": "$text-primary",
                                       "content": "17",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10876,7 +10897,8 @@
                                       "fill": "$text-primary",
                                       "content": "19",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -10907,7 +10929,8 @@
                                       "fill": "$text-primary",
                                       "content": "20",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10929,7 +10952,8 @@
                                       "fill": "$text-primary",
                                       "content": "21",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10951,7 +10975,8 @@
                                       "fill": "$text-primary",
                                       "content": "22",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10973,7 +10998,8 @@
                                       "fill": "$text-primary",
                                       "content": "23",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -10995,7 +11021,8 @@
                                       "fill": "$text-primary",
                                       "content": "24",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -11017,7 +11044,8 @@
                                       "fill": "$text-primary",
                                       "content": "25",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -11039,7 +11067,8 @@
                                       "fill": "$text-primary",
                                       "content": "26",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -11094,7 +11123,8 @@
                                   "fill": "$text-secondary",
                                   "content": "09:00",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -11118,7 +11148,8 @@
                                   "fill": "$text-secondary",
                                   "content": "10:30",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -11167,7 +11198,8 @@
                                   "fill": "$text-secondary",
                                   "content": "15:00",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -11191,7 +11223,8 @@
                                   "fill": "$text-secondary",
                                   "content": "17:30",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             }
@@ -13450,7 +13483,8 @@
                               "fill": "$text-secondary",
                               "content": "‹",
                               "fontFamily": "Inter",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -13499,7 +13533,8 @@
                               "fill": "$text-secondary",
                               "content": "2",
                               "fontFamily": "Inter",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -13523,7 +13558,8 @@
                               "fill": "$text-secondary",
                               "content": "3",
                               "fontFamily": "Inter",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -13547,7 +13583,8 @@
                               "fill": "$text-secondary",
                               "content": "›",
                               "fontFamily": "Inter",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -13698,7 +13735,8 @@
                                   "fill": "#FFFFFFCC",
                                   "content": "Información básica",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -13765,7 +13803,8 @@
                                   "fill": "#FFFFFFCC",
                                   "content": "Ubicación",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -13900,7 +13939,8 @@
                                   "fill": "#FFFFFF66",
                                   "content": "Precio y condiciones",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             }
@@ -13957,7 +13997,8 @@
                                   "fill": "#FFFFFF66",
                                   "content": "Fotos y descripción",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             }
@@ -15184,6 +15225,9 @@
           "name": "Header Home",
           "width": "fill_container",
           "descendants": {
+            "ZE5VE": {
+              "width": "fill_container"
+            },
             "xfYdW": {
               "enabled": false
             },
@@ -16729,6 +16773,9 @@
           "name": "Header Resultados",
           "width": "fill_container",
           "descendants": {
+            "ZE5VE": {
+              "width": "fill_container"
+            },
             "xfYdW": {
               "enabled": false
             },
@@ -17426,7 +17473,8 @@
                                   "fill": "$text-secondary",
                                   "content": "Más recientes",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -17450,7 +17498,8 @@
                                   "fill": "$text-secondary",
                                   "content": "Menor precio",
                                   "fontFamily": "Inter",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -18785,6 +18834,9 @@
           "name": "Header Detalle",
           "width": "fill_container",
           "descendants": {
+            "ZE5VE": {
+              "width": "fill_container"
+            },
             "xfYdW": {
               "enabled": false
             },
@@ -20489,7 +20541,7 @@
                           "fill": {
                             "type": "image",
                             "enabled": true,
-                            "url": "./images/generated-1782519910877.png",
+                            "url": "images/generated-1782519910877.png",
                             "mode": "fill"
                           },
                           "cornerRadius": 10,
@@ -21257,6 +21309,9 @@
           "name": "Header Comparacion",
           "width": "fill_container",
           "descendants": {
+            "ZE5VE": {
+              "width": "fill_container"
+            },
             "xfYdW": {
               "enabled": false
             },
@@ -25336,6 +25391,9 @@
           "name": "Header Registro",
           "width": "fill_container",
           "descendants": {
+            "ZE5VE": {
+              "width": "fill_container"
+            },
             "xfYdW": {
               "enabled": false
             },

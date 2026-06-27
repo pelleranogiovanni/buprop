@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Link } from "@inertiajs/react"
-import { MapPin, Bed, Bath, Maximize2, BarChart3 } from "lucide-react"
+import { MapPin, Bed, Bath, Maximize2 } from "lucide-react"
 import { useCompare } from "@/contexts/CompareContext"
 import { cn } from "@/lib/utils"
 
@@ -40,15 +40,15 @@ const propertyTypeLabels: Record<string, string> = {
   commercial: 'Local comercial',
 }
 
-export function PropertyCard({ property, status }: PropertyCardProps) {
+export function PropertyCard({ property, status = 'active' }: PropertyCardProps) {
   const { addToCompare, removeFromCompare, isInCompare, compareList } = useCompare()
 
-  const formatPrice = (price: number, currency: string) =>
-    new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: currency === 'ARS' ? 'ARS' : 'USD',
-      minimumFractionDigits: 0,
-    }).format(price)
+  const formatPrice = (price: number, currency: string, operationType: string) => {
+    const n = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 0 }).format(price)
+    const prefix = currency === 'USD' ? 'USD ' : 'AR$ '
+    const suffix = operationType === 'rent' ? '/mes' : ''
+    return `${prefix}${n}${suffix}`
+  }
 
   const typeLabel = propertyTypeLabels[property.property_type] ?? property.property_type
   const inCompare = isInCompare(property.listing_id)
@@ -82,8 +82,8 @@ export function PropertyCard({ property, status }: PropertyCardProps) {
 
         {/* Price overlay — bottom-left */}
         <div className="absolute bottom-3 left-3">
-          <span className="rounded-lg bg-black/75 px-2.5 py-1 text-base font-bold text-white">
-            {formatPrice(property.price, property.currency)}
+          <span className="rounded-lg bg-black/80 px-3 py-1.5 text-base font-bold text-white">
+            {formatPrice(property.price, property.currency, property.operation_type)}
           </span>
         </div>
       </Link>
@@ -108,46 +108,27 @@ export function PropertyCard({ property, status }: PropertyCardProps) {
         {/* Features row */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
-            <Bed className="h-3.5 w-3.5 text-slate-500" />
-            <span className="text-xs text-slate-500">{property.bedrooms}</span>
+            <Bed className="h-3.5 w-3.5 text-[#475569]" />
+            <span className="text-xs text-[#475569]">{property.bedrooms} dorm.</span>
           </div>
           <div className="flex items-center gap-1">
-            <Bath className="h-3.5 w-3.5 text-slate-500" />
-            <span className="text-xs text-slate-500">{property.bathrooms}</span>
+            <Bath className="h-3.5 w-3.5 text-[#475569]" />
+            <span className="text-xs text-[#475569]">{property.bathrooms} baños</span>
           </div>
           <div className="flex items-center gap-1">
-            <Maximize2 className="h-3.5 w-3.5 text-slate-500" />
-            <span className="text-xs text-slate-500">{property.covered_m2}m²</span>
+            <Maximize2 className="h-3.5 w-3.5 text-[#475569]" />
+            <span className="text-xs text-[#475569]">{property.covered_m2} m²</span>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between border-t border-border pt-3">
-          {/* Status badge (optional) */}
-          <div>
-            {status && (
-              <Badge variant={status} className="rounded-full text-[11px]">
-                {statusLabels[status]}
-              </Badge>
-            )}
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-1.5">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn("h-7 w-7", inCompare && "text-primary")}
-              disabled={!inCompare && !canAdd}
-              onClick={() => (inCompare ? removeFromCompare(property.listing_id) : addToCompare(property))}
-              title={inCompare ? 'Quitar del comparador' : 'Agregar al comparador'}
-            >
-              <BarChart3 className="h-3.5 w-3.5" />
-            </Button>
-            <Button size="sm" className="h-7 px-3 text-xs" asChild>
-              <Link href={`/propiedad/${property.listing_id}`}>Contactar</Link>
-            </Button>
-          </div>
+        <div className="flex items-center justify-between">
+          <Badge variant={status} className="rounded-full text-[11px]">
+            {statusLabels[status]}
+          </Badge>
+          <Button size="sm" className="h-8 px-3.5 text-xs font-semibold" asChild>
+            <Link href={`/propiedad/${property.listing_id}`}>Ver detalle</Link>
+          </Button>
         </div>
       </div>
     </div>
