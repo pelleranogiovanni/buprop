@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         // Admin user
         $admin = User::create([
             'name' => 'Admin Sistema',
-            'email' => 'admin@mialquiler.com',
+            'email' => 'admin@buprop.com',
             'password' => Hash::make('password'),
             'phone' => '+54 364 1234-5678',
             'city_id' => $villaAngelaCityId,

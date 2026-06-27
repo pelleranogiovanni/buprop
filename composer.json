@@ -1,11 +1,12 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/react-starter-kit",
+    "name": "buprop/buprop",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Plataforma web para publicación y gestión de propiedades en alquiler y venta.",
     "keywords": [
         "laravel",
-        "framework"
+        "inmuebles",
+        "alquiler"
     ],
     "license": "MIT",
     "require": {

@@ -36,7 +36,7 @@ export function Logo({ className, size = "md" }: LogoProps) {
         "font-bold text-foreground",
         textSizes[size]
       )}>
-        Mi Alquiler
+        Buprop
       </span>
     </div>
   )
