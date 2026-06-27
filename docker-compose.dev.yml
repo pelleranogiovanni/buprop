@@ -1,31 +1,31 @@
 version: '3.8'
 
 services:
-  mi-alquiler-db:
+  buprop-db:
     image: postgres:15-alpine
-    container_name: mi-alquiler-db
+    container_name: buprop-db
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_DB: mi_alquiler
-      POSTGRES_USER: mi_alquiler_user
-      POSTGRES_PASSWORD: mi_alquiler_pass
+      POSTGRES_DB: buprop
+      POSTGRES_USER: buprop_user
+      POSTGRES_PASSWORD: buprop_pass
     volumes:
-      - mi-alquiler-db-data:/var/lib/postgresql/data
+      - buprop-db-data:/var/lib/postgresql/data
     networks:
-      - mi-alquiler-network
+      - buprop-network
 
-  mi-alquiler-redis:
+  buprop-redis:
     image: redis:7-alpine
-    container_name: mi-alquiler-redis
+    container_name: buprop-redis
     ports:
       - "6380:6379"
     networks:
-      - mi-alquiler-network
+      - buprop-network
 
 volumes:
-  mi-alquiler-db-data:
+  buprop-db-data:
 
 networks:
-  mi-alquiler-network:
+  buprop-network:
     driver: bridge

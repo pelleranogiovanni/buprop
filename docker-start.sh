@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Iniciando Mi Alquiler con Docker..."
+echo "🚀 Iniciando Buprop con Docker..."
 
 # Copiar archivo de entorno
 if [ ! -f .env ]; then
@@ -18,17 +18,17 @@ sleep 30
 
 # Generar clave de aplicación
 echo "🔑 Generando clave de aplicación..."
-docker-compose exec mi-alquiler-app php artisan key:generate
+docker-compose exec buprop-app php artisan key:generate
 
 # Ejecutar migraciones
 echo "📊 Ejecutando migraciones..."
-docker-compose exec mi-alquiler-app php artisan migrate
+docker-compose exec buprop-app php artisan migrate
 
 # Ejecutar seeders (opcional)
 echo "🌱 Ejecutando seeders..."
-docker-compose exec mi-alquiler-app php artisan db:seed
+docker-compose exec buprop-app php artisan db:seed
 
-echo "✅ ¡Mi Alquiler está listo!"
+echo "✅ ¡Buprop está listo!"
 echo "🌐 Aplicación: http://localhost:8080"
 echo "🗄️  Base de datos PostgreSQL: localhost:5433"
 echo "⚡ Vite dev server: http://localhost:5174"

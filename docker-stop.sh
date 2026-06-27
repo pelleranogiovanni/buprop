@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🛑 Deteniendo Mi Alquiler..."
+echo "🛑 Deteniendo Buprop..."
 
 # Detener contenedores
 docker-compose down
