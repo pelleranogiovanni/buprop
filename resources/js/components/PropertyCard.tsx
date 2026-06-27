@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Link } from "@inertiajs/react"
-import { MapPin, Bed, Bath, Maximize2 } from "lucide-react"
+import { MapPin, Bed, Bath, Maximize2, GitCompare, Check } from "lucide-react"
 import { useCompare } from "@/contexts/CompareContext"
 import { cn } from "@/lib/utils"
 
@@ -25,6 +25,7 @@ interface Property {
 interface PropertyCardProps {
   property: Property
   status?: 'active' | 'reserved' | 'inactive' | 'sold'
+  showCompare?: boolean
 }
 
 const statusLabels: Record<string, string> = {
@@ -40,7 +41,7 @@ const propertyTypeLabels: Record<string, string> = {
   commercial: 'Local comercial',
 }
 
-export function PropertyCard({ property, status = 'active' }: PropertyCardProps) {
+export function PropertyCard({ property, status = 'active', showCompare = false }: PropertyCardProps) {
   const { addToCompare, removeFromCompare, isInCompare, compareList } = useCompare()
 
   const formatPrice = (price: number, currency: string, operationType: string) => {
@@ -62,7 +63,7 @@ export function PropertyCard({ property, status = 'active' }: PropertyCardProps)
       )}
     >
       {/* Image area */}
-      <Link href={`/propiedad/${property.listing_id}`} className="relative block h-48 overflow-hidden">
+      <Link href={`/properties/${property.listing_id}`} className="relative block h-48 overflow-hidden">
         <img
           src={property.cover_image || `https://picsum.photos/400/300?random=${property.listing_id}`}
           alt={`${typeLabel} en ${property.city_name}`}
@@ -91,7 +92,7 @@ export function PropertyCard({ property, status = 'active' }: PropertyCardProps)
       {/* Card content */}
       <div className="flex flex-col gap-3 p-4">
         {/* Title */}
-        <Link href={`/propiedad/${property.listing_id}`}>
+        <Link href={`/properties/${property.listing_id}`}>
           <h3 className="text-[15px] font-semibold leading-snug text-foreground transition-colors hover:text-primary">
             {typeLabel} en {property.neighborhood_name || property.city_name}
           </h3>
@@ -127,9 +128,38 @@ export function PropertyCard({ property, status = 'active' }: PropertyCardProps)
             {statusLabels[status]}
           </Badge>
           <Button size="sm" className="h-8 px-3.5 text-xs font-semibold" asChild>
-            <Link href={`/propiedad/${property.listing_id}`}>Ver detalle</Link>
+            <Link href={`/properties/${property.listing_id}`}>Ver detalle</Link>
           </Button>
         </div>
+
+        {/* Compare action — only on results page */}
+        {showCompare && (
+          <button
+            type="button"
+            onClick={() => inCompare ? removeFromCompare(property.listing_id) : addToCompare(property)}
+            disabled={!inCompare && !canAdd}
+            className={cn(
+              'flex w-full items-center justify-center gap-1.5 rounded-lg border py-2 text-xs font-medium transition-colors',
+              inCompare
+                ? 'border-primary bg-primary-light text-primary hover:bg-primary-light/70'
+                : canAdd
+                  ? 'border-border text-muted-foreground hover:border-primary/40 hover:text-primary'
+                  : 'cursor-not-allowed border-border text-muted-foreground/40',
+            )}
+          >
+            {inCompare ? (
+              <>
+                <Check className="h-3 w-3" />
+                En comparación
+              </>
+            ) : (
+              <>
+                <GitCompare className="h-3 w-3" />
+                Agregar a comparación
+              </>
+            )}
+          </button>
+        )}
       </div>
     </div>
   )

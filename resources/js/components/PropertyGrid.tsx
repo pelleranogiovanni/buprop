@@ -54,7 +54,7 @@ export function PropertyGrid({ listings }: PropertyGridProps) {
             No hay propiedades que coincidan con tus criterios de búsqueda.
             Intenta ajustar los filtros para ver más resultados.
           </p>
-          <Button variant="outline" onClick={() => window.location.href = '/'}>
+          <Button variant="outline" onClick={() => window.location.href = '/properties'}>
             Ver todas las propiedades
           </Button>
         </div>
@@ -64,22 +64,15 @@ export function PropertyGrid({ listings }: PropertyGridProps) {
 
   return (
     <div className="space-y-8">
-      {/* Results Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-foreground">
-            {listings?.total?.toLocaleString() || 0} propiedades
-          </h2>
-          <p className="mt-1 text-muted-foreground">
-            Página {listings?.current_page || 1} de {listings?.last_page || 1}
-          </p>
-        </div>
-      </div>
+      {/* Page info */}
+      <p className="text-sm text-muted-foreground">
+        Página {listings?.current_page || 1} de {listings?.last_page || 1}
+      </p>
 
       {/* Property Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {listings.data.map((property) => (
-          <PropertyCard key={property.listing_id} property={property} />
+          <PropertyCard key={property.listing_id} property={property} showCompare />
         ))}
       </div>
 

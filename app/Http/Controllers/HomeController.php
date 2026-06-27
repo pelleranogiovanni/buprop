@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\ListingService;
 use Inertia\Inertia;
-use App\Models\Listing;
-use App\Models\Neighborhood;
+use Inertia\Response;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function __construct(
+        private readonly ListingService $listingService
+    ) {}
+
+    public function index(): Response
     {
-        $filters = $request->only(['operation_type', 'property_type', 'neighborhood_id', 'min_price', 'max_price', 'bedrooms']);
-        
-        $listings = Listing::getAvailableListings($filters);
-        $neighborhoods = Neighborhood::getByCity('Villa Ángela');
-        
         return Inertia::render('Home', [
-            'listings' => $listings,
-            'neighborhoods' => $neighborhoods,
-            'filters' => $filters,
+            'featuredListings' => $this->listingService->getFeatured(3),
             'auth' => [
-                'user' => auth()->user() ? auth()->user()->load('roles') : null
-            ]
+                'user' => auth()->check() ? auth()->user()->load('roles') : null,
+            ],
         ]);
     }
 }
