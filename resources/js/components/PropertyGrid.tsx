@@ -40,18 +40,18 @@ interface PropertyGridProps {
 export function PropertyGrid({ listings }: PropertyGridProps) {
   if (!listings || !listings.data || listings.data.length === 0) {
     return (
-      <div className="text-center py-16">
-        <div className="max-w-md mx-auto">
-          <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="py-16 text-center">
+        <div className="mx-auto max-w-md">
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+            <svg className="h-10 w-10 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m0 0H5m0 0h2M7 7h10M7 10h10M7 13h10M7 16h10" />
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-3">
+          <h3 className="mb-3 text-xl font-semibold text-foreground">
             No encontramos propiedades
           </h3>
-          <p className="text-gray-600 mb-6 leading-relaxed">
-            No hay propiedades que coincidan con tus criterios de búsqueda. 
+          <p className="mb-6 leading-relaxed text-muted-foreground">
+            No hay propiedades que coincidan con tus criterios de búsqueda.
             Intenta ajustar los filtros para ver más resultados.
           </p>
           <Button variant="outline" onClick={() => window.location.href = '/'}>
@@ -67,10 +67,10 @@ export function PropertyGrid({ listings }: PropertyGridProps) {
       {/* Results Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-foreground">
             {listings?.total?.toLocaleString() || 0} propiedades
           </h2>
-          <p className="text-gray-600 mt-1">
+          <p className="mt-1 text-muted-foreground">
             Página {listings?.current_page || 1} de {listings?.last_page || 1}
           </p>
         </div>
@@ -131,7 +131,7 @@ export function PropertyGrid({ listings }: PropertyGridProps) {
             
             if (link.label === '...') {
               return (
-                <span key={index} className="px-3 py-2 text-gray-500">
+                <span key={index} className="px-3 py-2 text-muted-foreground">
                   ...
                 </span>
               )

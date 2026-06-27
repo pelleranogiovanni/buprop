@@ -124,7 +124,7 @@ export function PropertyFilters({ neighborhoods, filters }: PropertyFiltersProps
           <div className="border-t pt-4 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Precio mínimo</label>
+                <label className="text-sm font-medium text-foreground">Precio mínimo</label>
                 <Input
                   type="number"
                   placeholder="$ 0"
@@ -134,7 +134,7 @@ export function PropertyFilters({ neighborhoods, filters }: PropertyFiltersProps
               </div>
               
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Precio máximo</label>
+                <label className="text-sm font-medium text-foreground">Precio máximo</label>
                 <Input
                   type="number"
                   placeholder="$ Sin límite"
@@ -144,7 +144,7 @@ export function PropertyFilters({ neighborhoods, filters }: PropertyFiltersProps
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Dormitorios</label>
+                <label className="text-sm font-medium text-foreground">Dormitorios</label>
                 <Select
                   value={localFilters.bedrooms || ""}
                   onValueChange={(value) => setLocalFilters(prev => ({ ...prev, bedrooms: value }))}
@@ -164,7 +164,7 @@ export function PropertyFilters({ neighborhoods, filters }: PropertyFiltersProps
             </div>
 
             <div className="flex justify-end">
-              <Button variant="ghost" onClick={handleClear} className="text-gray-600">
+              <Button variant="ghost" onClick={handleClear} className="text-muted-foreground">
                 <X className="w-4 h-4 mr-2" />
                 Limpiar filtros
               </Button>

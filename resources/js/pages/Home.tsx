@@ -1,8 +1,12 @@
 import { Head } from '@inertiajs/react'
-import { PropertyFilters } from '@/components/PropertyFilters'
+import { FilterPanel } from '@/components/FilterPanel'
 import { PropertyGrid } from '@/components/PropertyGrid'
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
+import { NaturalSearchBar } from '@/components/NaturalSearchBar'
+import { SearchCriteriaChips } from '@/components/SearchCriteriaChips'
+import { ComparisonBar } from '@/components/ComparisonBar'
+import { PublicHeader } from '@/components/PublicHeader'
+import { AuthenticatedHeader } from '@/components/AuthenticatedHeader'
+import { PublicFooter } from '@/components/PublicFooter'
 
 interface Neighborhood {
   neighborhood_id: string
@@ -39,8 +43,6 @@ interface PaginatedListings {
   }>
 }
 
-
-
 interface AuthProps {
   user?: {
     id: number
@@ -61,44 +63,81 @@ interface HomeProps {
     min_price?: string
     max_price?: string
     bedrooms?: string
+    q?: string
   }
   auth: AuthProps
 }
 
 export default function Home({ listings, neighborhoods, filters, auth }: HomeProps) {
+  const hasActiveFilters = Object.values(filters).some(Boolean)
+
   return (
     <>
-      <Head title="Mi Alquiler - Encuentra tu hogar ideal" />
-      
+      <Head title="BuProp — Encontrá tu próxima propiedad" />
+
       <div className="min-h-screen bg-background flex flex-col">
-        <Navbar user={auth?.user} />
-        
-        {/* Hero Section */}
-        <div className="bg-background border-b">
-          <div className="container mx-auto px-6 py-12 lg:py-20">
-            <div className="text-center max-w-4xl mx-auto mb-12">
-              <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Encuentra tu
-                <span className="text-primary"> hogar ideal</span>
+        {auth?.user
+          ? <AuthenticatedHeader user={auth.user} />
+          : <PublicHeader />
+        }
+
+        {/* Hero / Search */}
+        <div className="border-b bg-[#0F172A]">
+          <div className="mx-auto max-w-screen-xl px-6 py-12 lg:py-20">
+            <div className="mb-8 text-center">
+              <h1 className="mb-3 text-4xl font-bold leading-tight text-white lg:text-5xl">
+                Encontrá tu
+                <span className="text-primary"> próxima propiedad</span>
               </h1>
-              <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Descubre las mejores propiedades en Villa Ángela y alrededores con nuestra plataforma moderna y fácil de usar
+              <p className="text-base text-white/50 lg:text-lg">
+                Buscá, compará y contactá propiedades en Villa Ángela
               </p>
             </div>
-            
-            <div className="max-w-6xl mx-auto">
-              <PropertyFilters neighborhoods={neighborhoods} filters={filters} />
+
+            <div className="mx-auto max-w-2xl">
+              <NaturalSearchBar initialValue={filters.q ?? ""} />
             </div>
           </div>
         </div>
-        
-        {/* Results Section */}
-        <div className="container mx-auto px-6 py-8 lg:py-12 flex-1">
-          <PropertyGrid listings={listings} />
+
+        {/* Results */}
+        <div className="mx-auto max-w-screen-xl w-full flex-1 px-6 py-8">
+          {/* Active filter chips */}
+          {hasActiveFilters && (
+            <div className="mb-6">
+              <SearchCriteriaChips filters={filters} neighborhoods={neighborhoods} />
+            </div>
+          )}
+
+          {/* 2-column layout: FilterPanel + Grid */}
+          <div className="flex items-start gap-6">
+            {/* FilterPanel — desktop sidebar */}
+            <aside className="hidden w-[280px] shrink-0 lg:block">
+              <FilterPanel neighborhoods={neighborhoods} filters={filters} />
+            </aside>
+
+            {/* Results */}
+            <div className="min-w-0 flex-1">
+              {/* Results count */}
+              {listings?.total != null && (
+                <div className="mb-5 flex items-center gap-2">
+                  <span className="text-sm font-semibold text-foreground">
+                    {listings.total.toLocaleString()} propiedades encontradas
+                  </span>
+                  <span className="text-muted-foreground">·</span>
+                  <span className="text-sm text-muted-foreground">Villa Ángela, Chaco</span>
+                </div>
+              )}
+              <PropertyGrid listings={listings} />
+            </div>
+          </div>
         </div>
-        
-        <Footer />
+
+        <PublicFooter />
       </div>
+
+      {/* Sticky comparison bar */}
+      <ComparisonBar />
     </>
   )
 }

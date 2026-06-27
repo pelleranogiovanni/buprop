@@ -29,7 +29,7 @@ export default function Register() {
 
   return (
     <>
-      <Head title="Registro - Mi Alquiler" />
+      <Head title="Registro — BuProp" />
       
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
         <div className="w-full max-w-md space-y-6">
@@ -41,7 +41,7 @@ export default function Register() {
             <div>
               <h1 className="text-2xl font-bold">Crear cuenta</h1>
               <p className="text-muted-foreground">
-                Únete a la comunidad de Mi Alquiler
+                Únete a BuProp
               </p>
             </div>
           </div>

@@ -1,10 +1,11 @@
-import { Head, Link } from '@inertiajs/react'
-import { Navbar } from '@/components/Navbar'
+import { Head, Link, usePage } from '@inertiajs/react'
+import { PublicHeader } from '@/components/PublicHeader'
+import { AuthenticatedHeader } from '@/components/AuthenticatedHeader'
+import { PublicFooter } from '@/components/PublicFooter'
 import { PropertyImageGallery } from '@/components/PropertyImageGallery'
 import { PropertyInfo } from '@/components/PropertyInfo'
 import { ContactSection } from '@/components/ContactForm'
 import { PropertyMap } from '@/components/PropertyMap'
-import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Share2, Heart } from 'lucide-react'
 
@@ -40,10 +41,12 @@ interface PropertyDetailProps {
 }
 
 export default function PropertyDetail({ property }: PropertyDetailProps) {
+  const { auth } = usePage<{ auth: { user?: { id: number; name: string; email: string; roles?: Array<{ name: string }> } | null } }>().props
+
   const getPropertyTypeLabel = (type: string) => {
     const types = {
       house: 'Casa',
-      apartment: 'Departamento', 
+      apartment: 'Departamento',
       commercial: 'Local comercial'
     }
     return types[type as keyof typeof types] || type
@@ -51,12 +54,15 @@ export default function PropertyDetail({ property }: PropertyDetailProps) {
 
   return (
     <>
-      <Head title={`${getPropertyTypeLabel(property.property_type)} en ${property.city_name} - Mi Alquiler`} />
-      
+      <Head title={`${getPropertyTypeLabel(property.property_type)} en ${property.city_name} — BuProp`} />
+
       <div className="min-h-screen bg-background flex flex-col">
-        <Navbar />
+        {auth?.user
+          ? <AuthenticatedHeader user={auth.user} />
+          : <PublicHeader />
+        }
         
-        <div className="container mx-auto px-6 py-8 flex-1">
+        <div className="mx-auto max-w-screen-xl w-full px-6 py-8 flex-1">
           {/* Navegación */}
           <div className="flex items-center justify-between mb-6">
             <Button variant="ghost" asChild>
@@ -110,7 +116,7 @@ export default function PropertyDetail({ property }: PropertyDetailProps) {
           </div>
         </div>
         
-        <Footer />
+        <PublicFooter />
       </div>
     </>
   )

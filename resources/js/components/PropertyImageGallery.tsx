@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 interface PropertyImageGalleryProps {
   listingId: string
@@ -15,80 +14,75 @@ interface PropertyImageGalleryProps {
 
 export function PropertyImageGallery({ listingId, propertyType, cityName, images: dbImages }: PropertyImageGalleryProps) {
   const [currentImage, setCurrentImage] = useState(0)
-  
-  // Usar imágenes de BD si existen, sino generar placeholders
-  const images = dbImages && dbImages.length > 0 
+
+  const images = dbImages && dbImages.length > 0
     ? dbImages.map(img => img.url)
-    : Array.from({ length: 5 }, (_, index) => 
-        `https://picsum.photos/800/600?random=${listingId}-${index}`
-      )
+    : Array.from({ length: 5 }, (_, i) => `https://picsum.photos/800/600?random=${listingId}-${i}`)
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length)
-  }
-
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
-  }
+  const prev = () => setCurrentImage(i => (i - 1 + images.length) % images.length)
+  const next = () => setCurrentImage(i => (i + 1) % images.length)
 
   return (
-    <div className="space-y-4">
-      {/* Imagen principal */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-100">
+    <div className="space-y-3">
+      {/* Main image */}
+      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
         <img
           src={images[currentImage]}
-          alt={`${propertyType} en ${cityName} - Imagen ${currentImage + 1}`}
-          className="w-full h-full object-cover"
+          alt={`${propertyType} en ${cityName} — imagen ${currentImage + 1}`}
+          className="h-full w-full object-cover"
         />
-        
-        {/* Controles de navegación */}
-        <div className="absolute inset-0 flex items-center justify-between p-4">
-          <Button
-            variant="secondary"
-            size="icon"
-            onClick={prevImage}
-            className="bg-white/90 hover:bg-white shadow-lg"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </Button>
-          <Button
-            variant="secondary"
-            size="icon"
-            onClick={nextImage}
-            className="bg-white/90 hover:bg-white shadow-lg"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </Button>
-        </div>
 
-        {/* Indicador de imagen */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-          <div className="bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+        {/* Nav arrows */}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-md transition-colors hover:bg-white"
+              aria-label="Imagen anterior"
+            >
+              <ChevronLeft className="h-4 w-4 text-foreground" />
+            </button>
+            <button
+              onClick={next}
+              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-md transition-colors hover:bg-white"
+              aria-label="Imagen siguiente"
+            >
+              <ChevronRight className="h-4 w-4 text-foreground" />
+            </button>
+          </>
+        )}
+
+        {/* Counter */}
+        <div className="absolute bottom-3 right-3">
+          <span className="rounded-full bg-black/50 px-3 py-1 text-xs text-white">
             {currentImage + 1} / {images.length}
-          </div>
+          </span>
         </div>
       </div>
 
-      {/* Miniaturas */}
-      <div className="grid grid-cols-5 gap-2">
-        {images.map((image, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentImage(index)}
-            className={`aspect-square overflow-hidden rounded-lg border-2 transition-all ${
-              currentImage === index 
-                ? 'border-primary shadow-md' 
-                : 'border-gray-200 hover:border-gray-300'
-            }`}
-          >
-            <img
-              src={image}
-              alt={`Miniatura ${index + 1}`}
-              className="w-full h-full object-cover"
-            />
-          </button>
-        ))}
-      </div>
+      {/* Thumbnails */}
+      {images.length > 1 && (
+        <div className="grid grid-cols-5 gap-2">
+          {images.map((image, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImage(index)}
+              className={`aspect-square overflow-hidden rounded-md border-2 transition-all ${
+                currentImage === index
+                  ? 'border-primary shadow-sm'
+                  : 'border-border hover:border-muted-foreground'
+              }`}
+              aria-label={`Ver imagen ${index + 1}`}
+            >
+              <img
+                src={image}
+                alt={`Miniatura ${index + 1}`}
+                className="h-full w-full object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

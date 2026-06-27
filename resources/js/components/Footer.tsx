@@ -58,7 +58,7 @@ export function Footer() {
         {/* Línea divisoria y copyright */}
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Mi Alquiler. Todos los derechos reservados.
+            © {currentYear} BuProp. Todos los derechos reservados.
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/privacidad" className="text-muted-foreground hover:text-foreground transition-colors">

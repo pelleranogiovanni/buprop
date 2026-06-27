@@ -29,4 +29,15 @@ Route::middleware('auth')->group(function () {
 
 
 
+// Onboarding routes
+Route::get('/registrarse', fn() => Inertia::render('Onboarding/Register'))->name('onboarding.register');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/preferencias', fn() => Inertia::render('Onboarding/Preferences'))->name('onboarding.preferences');
+    Route::post('/preferencias', function (\Illuminate\Http\Request $request) {
+        // Persist to SearchPreference model when backend is ready
+        return redirect()->route('home');
+    })->name('onboarding.preferences.store');
+});
+
 require __DIR__.'/settings.php';
