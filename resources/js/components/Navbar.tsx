@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { Logo } from "@/components/ui/logo"
 import { NavLink } from "@/components/ui/nav-link"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { UserMenu } from "@/components/UserMenu"
 import { Link } from "@inertiajs/react"
-import { Menu, User, Heart, Plus } from "lucide-react"
+import { Menu, User, Heart, Plus, BarChart3 } from "lucide-react"
 import { useState } from "react"
+import { useCompare } from "@/contexts/CompareContext"
 
 interface NavbarProps {
   user?: {
@@ -18,6 +20,7 @@ interface NavbarProps {
 
 export function Navbar({ user }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { compareList } = useCompare()
 
   const navItems = [
     { href: "/", label: "Inicio", active: true },
@@ -48,6 +51,17 @@ export function Navbar({ user }: NavbarProps) {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3">
+            <Button variant="ghost" size="sm" className="text-muted-foreground relative" asChild>
+              <Link href="/comparador">
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Comparar
+                {compareList.length > 0 && (
+                  <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 text-xs">
+                    {compareList.length}
+                  </Badge>
+                )}
+              </Link>
+            </Button>
             {user ? (
               <>
                 <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>

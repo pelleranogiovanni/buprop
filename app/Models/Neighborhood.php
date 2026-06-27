@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Neighborhood extends Model
 {
+    use HasFactory, HasUuids, SoftDeletes;
+
+    protected $table = 'neighborhoods';
     protected $primaryKey = 'neighborhood_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
 
     protected $fillable = [
-        'neighborhood_id',
         'city_id',
         'name',
     ];
@@ -26,6 +29,11 @@ class Neighborhood extends Model
     public function properties(): HasMany
     {
         return $this->hasMany(Property::class, 'neighborhood_id', 'neighborhood_id');
+    }
+
+    public function searchPreferences(): HasMany
+    {
+        return $this->hasMany(SearchPreference::class, 'neighborhood_id', 'neighborhood_id');
     }
 
     public static function getByCity(string $cityName)

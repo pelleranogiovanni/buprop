@@ -67,10 +67,12 @@ return new class extends Migration {
             Schema::create('properties', function (Blueprint $table) {
                 $table->uuid('property_id')->primary();
                 $table->foreignId('owner_id')->constrained('users')->restrictOnDelete();
-                $table->string('property_type', 20);
-                $table->string('address', 140);
                 $table->uuid('city_id');
                 $table->uuid('neighborhood_id')->nullable();
+                $table->string('property_type', 20);
+                $table->string('title', 200);
+                $table->text('description');
+                $table->string('address', 140);
                 $table->smallInteger('bedrooms');
                 $table->smallInteger('bathrooms');
                 $table->smallInteger('rooms');
@@ -79,7 +81,10 @@ return new class extends Migration {
                 $table->decimal('latitude', 9, 6)->nullable();
                 $table->decimal('longitude', 9, 6)->nullable();
                 $table->string('formatted_address', 200)->nullable();
-                $table->integer('location_precision')->nullable();
+                $table->smallInteger('location_precision')->nullable();
+                $table->string('map_url', 300)->nullable();
+                $table->boolean('has_patio')->default(false);
+                $table->boolean('has_garage')->default(false);
                 if (method_exists($table, 'jsonb')) {
                     $table->jsonb('amenities')->nullable();
                 } else {
@@ -123,6 +128,9 @@ return new class extends Migration {
                 $table->string('availability_status', 20);
                 $table->string('moderation_status', 20);
                 $table->text('requirements');
+                $table->text('conditions')->nullable();
+                $table->boolean('allows_pets')->default(false);
+                $table->boolean('allows_children')->default(true);
                 $table->date('available_from')->nullable();
                 $table->boolean('allow_messages');
                 $table->timestampsTz();
@@ -136,9 +144,9 @@ return new class extends Migration {
             });
         }
 
-        // === MonitoringLogs ===
-        if (!Schema::hasTable('monitoring_logs')) {
-            Schema::create('monitoring_logs', function (Blueprint $table) {
+        // === ModerationLogs ===
+        if (!Schema::hasTable('moderation_logs')) {
+            Schema::create('moderation_logs', function (Blueprint $table) {
                 $table->uuid('moderation_id')->primary();
                 $table->uuid('listing_id');
                 $table->foreignId('admin_id')->constrained('users')->restrictOnDelete();
@@ -190,7 +198,7 @@ return new class extends Migration {
     {
         Schema::dropIfExists('visit_requests');
         Schema::dropIfExists('contact_requests');
-        Schema::dropIfExists('monitoring_logs');
+        Schema::dropIfExists('moderation_logs');
         Schema::dropIfExists('listings');
         Schema::dropIfExists('property_images');
         Schema::dropIfExists('properties');

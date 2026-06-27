@@ -1,7 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Link } from "@inertiajs/react"
-import { MapPin, Bed, Bath, Square } from "lucide-react"
+import { MapPin, Bed, Bath, Square, BarChart3 } from "lucide-react"
+import { useCompare } from "@/contexts/CompareContext"
 
 interface Property {
   listing_id: string
@@ -25,6 +27,7 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({ property }: PropertyCardProps) {
+  const { addToCompare, removeFromCompare, isInCompare, compareList } = useCompare()
   const formatPrice = (price: number, currency: string) => {
     return new Intl.NumberFormat('es-AR', {
       style: 'currency',
@@ -133,8 +136,28 @@ export function PropertyCard({ property }: PropertyCardProps) {
             }
           })()}
           
-          <div className="text-xs text-gray-500 pt-3 border-t border-gray-100">
-            <span className="font-medium text-gray-600">{property.publisher_name}</span>
+          <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+            <div className="text-xs text-gray-500">
+              <span className="font-medium text-gray-600">{property.publisher_name}</span>
+            </div>
+            <Button
+              variant={isInCompare(property.listing_id) ? "default" : "outline"}
+              size="sm"
+              disabled={!isInCompare(property.listing_id) && compareList.length >= 3}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                if (isInCompare(property.listing_id)) {
+                  removeFromCompare(property.listing_id)
+                } else {
+                  addToCompare(property)
+                }
+              }}
+              className="h-7 px-2 text-xs"
+            >
+              <BarChart3 className="w-3 h-3 mr-1" />
+              {isInCompare(property.listing_id) ? 'Quitar' : 'Comparar'}
+            </Button>
           </div>
         </div>
       </CardContent>

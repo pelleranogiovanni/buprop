@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mi-alquiler-db:
+    image: postgres:15-alpine
+    container_name: mi-alquiler-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: mi_alquiler
+      POSTGRES_USER: mi_alquiler_user
+      POSTGRES_PASSWORD: mi_alquiler_pass
+    volumes:
+      - mi-alquiler-db-data:/var/lib/postgresql/data
+    networks:
+      - mi-alquiler-network
+
+  mi-alquiler-redis:
+    image: redis:7-alpine
+    container_name: mi-alquiler-redis
+    ports:
+      - "6380:6379"
+    networks:
+      - mi-alquiler-network
+
+volumes:
+  mi-alquiler-db-data:
+
+networks:
+  mi-alquiler-network:
+    driver: bridge

@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Listing extends Model
 {
+    use HasFactory, HasUuids, SoftDeletes;
+
+    protected $table = 'listings';
     protected $primaryKey = 'listing_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
 
     protected $fillable = [
-        'listing_id',
         'property_id',
         'publisher_id',
         'operation_type',
@@ -21,6 +25,9 @@ class Listing extends Model
         'availability_status',
         'moderation_status',
         'requirements',
+        'conditions',
+        'allows_pets',
+        'allows_children',
         'available_from',
         'allow_messages',
         'published_at',
@@ -29,7 +36,11 @@ class Listing extends Model
     protected $casts = [
         'available_from' => 'date',
         'published_at' => 'datetime',
+        'rejected_at' => 'datetime',
         'allow_messages' => 'boolean',
+        'allows_pets' => 'boolean',
+        'allows_children' => 'boolean',
+        'price' => 'decimal:2',
     ];
 
     public function property(): BelongsTo
@@ -40,6 +51,21 @@ class Listing extends Model
     public function publisher(): BelongsTo
     {
         return $this->belongsTo(User::class, 'publisher_id');
+    }
+
+    public function contactRequests(): HasMany
+    {
+        return $this->hasMany(ContactRequest::class, 'listing_id', 'listing_id');
+    }
+
+    public function visitRequests(): HasMany
+    {
+        return $this->hasMany(VisitRequest::class, 'listing_id', 'listing_id');
+    }
+
+    public function moderationLogs(): HasMany
+    {
+        return $this->hasMany(ModerationLog::class, 'listing_id', 'listing_id');
     }
 
     public function scopeAvailable($query)

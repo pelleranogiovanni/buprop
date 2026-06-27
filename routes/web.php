@@ -7,6 +7,9 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/propiedad/{listing}', [\App\Http\Controllers\PropertyController::class, 'show'])->name('property.show');
+Route::get('/comparador', function() {
+    return Inertia::render('Compare');
+})->name('compare');
 
 // Auth routes
 Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
