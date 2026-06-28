@@ -19,6 +19,8 @@ class ContactRequest extends Model
         'listing_id',
         'requester_id',
         'message',
+        'contact_preference',
+        'contact_phone',
         'status',
     ];
 

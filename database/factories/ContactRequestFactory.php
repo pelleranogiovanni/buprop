@@ -17,6 +17,8 @@ class ContactRequestFactory extends Factory
             'listing_id' => Listing::factory(),
             'requester_id' => User::role('tenant')->inRandomOrder()->first()?->id ?? User::factory()->create(),
             'message' => $this->generateMessage(),
+            'contact_preference' => fake()->randomElement(['email', 'phone', 'whatsapp']),
+            'contact_phone' => fake()->optional()->numerify('+54 9 3735 ######'),
             'status' => fake()->randomElement(['sent', 'read', 'closed']),
         ];
     }

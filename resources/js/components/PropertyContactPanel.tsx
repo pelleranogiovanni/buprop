@@ -1,11 +1,19 @@
 import { useState } from "react"
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
+  Dialog, DialogContent, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog"
-import { ContactForm } from "@/components/ContactForm"
 import { VisitRequestForm } from "@/components/VisitRequestForm"
+import { ContactRequestModal } from "@/components/ContactRequestModal"
+import { AccessRequiredModal } from "@/components/AccessRequiredModal"
 import { useCompare } from "@/contexts/CompareContext"
 import { ShieldCheck, MessageCircle, CalendarCheck, GitCompare, Check } from "lucide-react"
+
+interface AuthUser {
+  id: number
+  name: string
+  email: string
+  phone?: string
+}
 
 interface PropertyContactPanelProps {
   property: {
@@ -14,6 +22,7 @@ interface PropertyContactPanelProps {
     price: number
     currency: string
     property_type: string
+    title: string
     address: string
     bedrooms: number
     bathrooms: number
@@ -28,6 +37,8 @@ interface PropertyContactPanelProps {
     published_at?: string
     cover_image?: string
   }
+  authUser?: AuthUser | null
+  allowMessages?: boolean
 }
 
 const availabilityLabels: Record<string, string> = {
@@ -58,10 +69,11 @@ function getInitials(name: string) {
     .join("")
 }
 
-export function PropertyContactPanel({ property }: PropertyContactPanelProps) {
+export function PropertyContactPanel({ property, authUser = null, allowMessages = true }: PropertyContactPanelProps) {
   const { addToCompare, removeFromCompare, isInCompare } = useCompare()
   const [contactOpen, setContactOpen] = useState(false)
   const [visitOpen, setVisitOpen] = useState(false)
+  const [accessOpen, setAccessOpen] = useState(false)
 
   const inCompare = isInCompare(property.listing_id)
   const isAgency = property.publisher_type === "agency"
@@ -71,6 +83,9 @@ export function PropertyContactPanel({ property }: PropertyContactPanelProps) {
   const verifiedText = property.publisher_verified
     ? `${typeText} ${isAgency ? "verificada" : "verificado"}`
     : typeText
+
+  const handleContact = () => (authUser ? setContactOpen(true) : setAccessOpen(true))
+  const handleVisit = () => (authUser ? setVisitOpen(true) : setAccessOpen(true))
 
   const toggleCompare = () => {
     if (inCompare) {
@@ -143,35 +158,24 @@ export function PropertyContactPanel({ property }: PropertyContactPanelProps) {
 
       {/* Acciones */}
       <div className="flex flex-col gap-2.5">
-        <Dialog open={contactOpen} onOpenChange={setContactOpen}>
-          <DialogTrigger asChild>
-            <button className="flex w-full items-center justify-center gap-2 rounded-[8px] bg-primary py-[13px] text-[15px] font-semibold text-white transition-colors hover:bg-primary-hover">
-              <MessageCircle className="h-4 w-4" />
-              Contactar
-            </button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Contactar publicación</DialogTitle>
-            </DialogHeader>
-            <ContactForm listingId={property.listing_id} publisherName={property.publisher_name} embedded />
-          </DialogContent>
-        </Dialog>
+        <button
+          type="button"
+          onClick={handleContact}
+          disabled={!allowMessages}
+          className="flex w-full items-center justify-center gap-2 rounded-[8px] bg-primary py-[13px] text-[15px] font-semibold text-white transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <MessageCircle className="h-4 w-4" />
+          Contactar
+        </button>
 
-        <Dialog open={visitOpen} onOpenChange={setVisitOpen}>
-          <DialogTrigger asChild>
-            <button className="flex w-full items-center justify-center gap-2 rounded-[8px] border-[1.5px] border-primary bg-card py-[11px] text-[15px] font-semibold text-primary transition-colors hover:bg-primary-light">
-              <CalendarCheck className="h-4 w-4" />
-              Solicitar visita
-            </button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Solicitar visita</DialogTitle>
-            </DialogHeader>
-            <VisitRequestForm listingId={property.listing_id} publisherName={property.publisher_name} embedded />
-          </DialogContent>
-        </Dialog>
+        <button
+          type="button"
+          onClick={handleVisit}
+          className="flex w-full items-center justify-center gap-2 rounded-[8px] border-[1.5px] border-primary bg-card py-[11px] text-[15px] font-semibold text-primary transition-colors hover:bg-primary-light"
+        >
+          <CalendarCheck className="h-4 w-4" />
+          Solicitar visita
+        </button>
 
         <button
           onClick={toggleCompare}
@@ -195,6 +199,58 @@ export function PropertyContactPanel({ property }: PropertyContactPanelProps) {
       <p className="text-[11px] leading-[17px] text-[#94A3B8]">
         La consulta se enviará al propietario o inmobiliaria responsable de la publicación.
       </p>
+
+      {/* Modales */}
+      {authUser && (
+        <>
+          <ContactRequestModal
+            open={contactOpen}
+            onOpenChange={setContactOpen}
+            onRequestVisit={() => setVisitOpen(true)}
+            property={{
+              listing_id: property.listing_id,
+              title: property.title,
+              price: property.price,
+              currency: property.currency,
+              operation_type: property.operation_type,
+              neighborhood_name: property.neighborhood_name,
+              city_name: property.city_name,
+              availability_status: property.availability_status,
+              cover_image: property.cover_image,
+            }}
+            publisher={{
+              name: property.publisher_name,
+              type: property.publisher_type,
+              verified: property.publisher_verified,
+            }}
+            user={{ name: authUser.name, email: authUser.email, phone: authUser.phone }}
+          />
+
+          <Dialog open={visitOpen} onOpenChange={setVisitOpen}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Solicitar visita</DialogTitle>
+              </DialogHeader>
+              <VisitRequestForm listingId={property.listing_id} publisherName={property.publisher_name} embedded />
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
+
+      <AccessRequiredModal
+        open={accessOpen}
+        onOpenChange={setAccessOpen}
+        property={{
+          title: property.title,
+          price: property.price,
+          currency: property.currency,
+          operation_type: property.operation_type,
+          neighborhood_name: property.neighborhood_name,
+          city_name: property.city_name,
+          availability_status: property.availability_status,
+          cover_image: property.cover_image,
+        }}
+      />
     </div>
   )
 }

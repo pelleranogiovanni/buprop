@@ -32,6 +32,7 @@ interface Property {
   price: number
   currency: string
   availability_status?: string
+  allow_messages?: boolean
   requirements?: string
   conditions?: string
   allows_pets?: boolean
@@ -75,7 +76,7 @@ const CONTAINER = "mx-auto w-full max-w-[1200px] px-6 lg:px-0"
 
 export default function PropertyDetail({ property, similarProperties }: PropertyDetailProps) {
   const { auth } = usePage<{
-    auth: { user?: { id: number; name: string; email: string; roles?: Array<{ name: string }> } | null }
+    auth: { user?: { id: number; name: string; email: string; phone?: string; roles?: Array<{ name: string }> } | null }
   }>().props
 
   const typeLabel = propertyTypeLabels[property.property_type] ?? property.property_type
@@ -139,7 +140,11 @@ export default function PropertyDetail({ property, similarProperties }: Property
             </div>
 
             <div className="w-full shrink-0 lg:w-[340px]">
-              <PropertyContactPanel property={{ ...property, cover_image: coverImage }} />
+              <PropertyContactPanel
+                property={{ ...property, title: pageTitle, cover_image: coverImage }}
+                authUser={auth?.user ?? null}
+                allowMessages={property.allow_messages}
+              />
             </div>
           </div>
         </div>

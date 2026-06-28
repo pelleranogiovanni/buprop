@@ -167,6 +167,8 @@ return new class extends Migration {
                 $table->uuid('listing_id');
                 $table->foreignId('requester_id')->constrained('users')->restrictOnDelete();
                 $table->text('message');
+                $table->string('contact_preference', 20)->default('email'); // email/phone/whatsapp
+                $table->string('contact_phone', 30)->nullable();
                 $table->string('status', 10); // sent/read/closed
                 $table->timestampsTz();
                 $table->softDeletesTz();

@@ -67,6 +67,7 @@ class PropertyController extends Controller
                 'price'             => $listing->price,
                 'currency'          => $listing->currency,
                 'availability_status' => $listing->availability_status,
+                'allow_messages'    => $listing->allow_messages,
                 'requirements'      => $listing->requirements,
                 'conditions'        => $listing->conditions,
                 'allows_pets'       => $listing->allows_pets,

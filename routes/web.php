@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/publicar', [\App\Http\Controllers\PublishController::class, 'create'])->name('publish.create');
     Route::post('/publicar', [\App\Http\Controllers\PublishController::class, 'store'])->name('publish.store');
     Route::patch('/listings/{listing}/moderation', [\App\Http\Controllers\DashboardController::class, 'updateModeration'])->name('listings.moderation');
+
+    // Contact requests
+    Route::post('/contact-requests', [\App\Http\Controllers\ContactRequestController::class, 'store'])->name('contact-requests.store');
 });
 
 // Onboarding routes
