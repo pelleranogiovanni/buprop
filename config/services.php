@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'ollama' => [
+        'url' => env('OLLAMA_URL', 'https://ollama.com/api/generate'),
+        'key' => env('OLLAMA_API_KEY'),
+        'model' => env('OLLAMA_MODEL', 'minimax-m3:cloud'),
+        'timeout' => (int) env('OLLAMA_TIMEOUT', 25),
+    ],
+
 ];

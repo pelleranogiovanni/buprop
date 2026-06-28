@@ -1,3 +1,4 @@
+import { CircleCheck, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface Property {
@@ -15,9 +16,25 @@ interface Property {
   publisher_name: string
 }
 
+export interface FitRow {
+  listing_id: string
+  cells: Record<string, boolean>
+}
+
 interface ComparisonTableProps {
   properties: Property[]
+  fit?: FitRow[]
 }
+
+const FIT_ROWS: { key: string; label: string }[] = [
+  { key: "operation_type", label: "Coincide con tipo de operación" },
+  { key: "property_type", label: "Coincide con tipo de propiedad" },
+  { key: "budget", label: "Dentro del presupuesto" },
+  { key: "bedrooms", label: "Coincide con dormitorios buscados" },
+  { key: "patio", label: "Tiene patio" },
+  { key: "garage", label: "Tiene garaje/cochera" },
+  { key: "pets", label: "Cumple preferencia de mascotas" },
+]
 
 const propertyTypeLabels: Record<string, string> = {
   house: "Casa",
@@ -58,8 +75,10 @@ const ROWS: RowDef[] = [
 
 const LABEL_COL = "w-[200px] shrink-0"
 
-export function ComparisonTable({ properties }: ComparisonTableProps) {
+export function ComparisonTable({ properties, fit }: ComparisonTableProps) {
   if (properties.length === 0) return null
+
+  const fitByListing = new Map((fit ?? []).map(f => [f.listing_id, f.cells]))
 
   return (
     <div className="overflow-x-auto rounded-xl border border-border">
@@ -129,6 +148,45 @@ export function ComparisonTable({ properties }: ComparisonTableProps) {
             </div>
           )
         })}
+
+        {/* Ajuste con preferencias */}
+        {fitByListing.size > 0 && (
+          <>
+            <div className="flex border-t border-border bg-primary-light">
+              <div className={cn(LABEL_COL, "px-5 py-2.5")}>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                  Ajuste con preferencias
+                </span>
+              </div>
+              {properties.map(p => (
+                <div key={p.listing_id} className="flex-1 border-l border-border py-2.5" />
+              ))}
+            </div>
+
+            {FIT_ROWS.map(row => (
+              <div key={row.key} className="flex border-t border-border bg-card">
+                <div className={cn(LABEL_COL, "px-5 py-4")}>
+                  <span className="text-[13px] text-muted-foreground">{row.label}</span>
+                </div>
+                {properties.map(p => {
+                  const ok = fitByListing.get(p.listing_id)?.[row.key] ?? false
+                  return (
+                    <div
+                      key={p.listing_id}
+                      className="flex flex-1 items-center justify-center border-l border-border px-5 py-4"
+                    >
+                      {ok ? (
+                        <CircleCheck className="h-[18px] w-[18px] text-[#059669]" />
+                      ) : (
+                        <X className="h-[18px] w-[18px] text-[#CBD5E1]" />
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </div>
   )

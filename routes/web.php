@@ -15,7 +15,12 @@ Route::get('/properties/{listing}', [PropertyController::class, 'show'])->name('
 // Backward-compat redirect for old Spanish URL
 Route::redirect('/propiedad/{listing}', '/properties/{listing}', 301);
 
-Route::get('/comparador', fn () => Inertia::render('Compare'))->name('compare');
+Route::get('/comparador', [\App\Http\Controllers\ComparisonController::class, 'index'])->name('compare');
+
+// Comparison AI analysis (interesados con preferencias)
+Route::post('/comparisons/analysis', [\App\Http\Controllers\ComparisonController::class, 'analyze'])
+    ->middleware('auth')
+    ->name('comparisons.analyze');
 
 // Auth routes
 Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
