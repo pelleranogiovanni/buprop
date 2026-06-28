@@ -37,10 +37,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/registrarse', fn () => Inertia::render('Onboarding/Register'))->name('onboarding.register');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/preferencias', fn () => Inertia::render('Onboarding/Preferences'))->name('onboarding.preferences');
-    Route::post('/preferencias', function () {
-        return redirect()->route('home');
-    })->name('onboarding.preferences.store');
+    Route::get('/preferencias', [\App\Http\Controllers\Onboarding\PreferencesController::class, 'show'])->name('onboarding.preferences');
+    Route::post('/preferencias', [\App\Http\Controllers\Onboarding\PreferencesController::class, 'store'])->name('onboarding.preferences.store');
 });
 
 require __DIR__.'/settings.php';

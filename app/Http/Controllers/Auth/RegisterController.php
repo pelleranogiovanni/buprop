@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class RegisterController extends Controller
@@ -38,7 +38,11 @@ class RegisterController extends Controller
         $user->assignRole($request->role);
 
         // Login automático
-        auth()->login($user);
+        Auth::login($user);
+
+        if ($request->role === 'tenant') {
+            return redirect()->route('onboarding.preferences');
+        }
 
         return redirect()->route('home');
     }
