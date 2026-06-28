@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import {
@@ -10,9 +9,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Link, router } from "@inertiajs/react"
-import { Menu, Search, BarChart3, Heart, Plus, User, LogOut, Settings } from "lucide-react"
+import { Menu, User, LogOut, Settings } from "lucide-react"
 import { useState } from "react"
-import { useCompare } from "@/contexts/CompareContext"
 import { useInitials } from "@/hooks/use-initials"
 
 interface AuthUser {
@@ -29,41 +27,13 @@ interface AuthenticatedHeaderProps {
 const navItems = [
     { href: "/", label: "Inicio" },
     { href: "/properties", label: "Propiedades" },
-    { href: "/contacto", label: "Contacto" },
+    { href: "/publicar", label: "Publicar propiedad" },
 ]
-
-function HeaderSearchBar() {
-    const [query, setQuery] = useState("")
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (query.trim()) {
-            router.get("/properties", { q: query.trim() }, { preserveState: false })
-        }
-    }
-
-    return (
-        <form onSubmit={handleSubmit} className="hidden md:flex flex-1 max-w-xl">
-            <div className="flex items-center gap-2 w-full h-10 rounded-md border border-input bg-background px-4 text-sm text-muted-foreground focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/30 transition-all">
-                <Search className="size-4 shrink-0" />
-                <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Buscar propiedades en Villa Ángela..."
-                    className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
-                />
-            </div>
-        </form>
-    )
-}
 
 export function AuthenticatedHeader({ user }: AuthenticatedHeaderProps) {
     const [open, setOpen] = useState(false)
-    const { compareList } = useCompare()
     const getInitials = useInitials()
     const initials = getInitials(user.name)
-    const isPublisher = user.roles?.some((r) => ["owner", "agency"].includes(r.name))
 
     const handleLogout = () => {
         router.post("/logout")
@@ -84,48 +54,15 @@ export function AuthenticatedHeader({ user }: AuthenticatedHeaderProps) {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            className="text-sm text-[#475569] hover:text-foreground transition-colors"
                         >
                             {item.label}
                         </Link>
                     ))}
                 </nav>
 
-                {/* Search bar — desktop */}
-                <HeaderSearchBar />
-
-                {/* Actions — desktop */}
-                <div className="hidden md:flex items-center gap-3 shrink-0">
-                    {/* Compare */}
-                    <Link href="/comparador" className="relative">
-                        <Button variant="ghost" size="icon" aria-label="Ver comparador">
-                            <BarChart3 className="size-4" />
-                        </Button>
-                        {compareList.length > 0 && (
-                            <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 text-[10px] flex items-center justify-center">
-                                {compareList.length}
-                            </Badge>
-                        )}
-                    </Link>
-
-                    {/* Favorites */}
-                    <Button variant="ghost" size="icon" aria-label="Favoritos" asChild>
-                        <Link href="/favoritos">
-                            <Heart className="size-4" />
-                        </Link>
-                    </Button>
-
-                    {/* Publish CTA — only for owners/agencies */}
-                    {isPublisher && (
-                        <Button size="sm" asChild>
-                            <Link href="/publicar">
-                                <Plus className="size-4" />
-                                Publicar propiedad
-                            </Link>
-                        </Button>
-                    )}
-
-                    {/* Avatar + dropdown */}
+                {/* Account — desktop */}
+                <div className="ml-auto hidden md:flex items-center gap-3 shrink-0">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <button className="outline-none" aria-label="Menú de usuario">
@@ -186,42 +123,11 @@ export function AuthenticatedHeader({ user }: AuthenticatedHeaderProps) {
                                         key={item.href}
                                         href={item.href}
                                         onClick={() => setOpen(false)}
-                                        className="px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                                        className="px-3 py-2 rounded-md text-sm text-[#475569] hover:text-foreground hover:bg-accent transition-colors"
                                     >
                                         {item.label}
                                     </Link>
                                 ))}
-                                <Link
-                                    href="/comparador"
-                                    onClick={() => setOpen(false)}
-                                    className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                                >
-                                    <BarChart3 className="size-4" />
-                                    Comparar
-                                    {compareList.length > 0 && (
-                                        <Badge className="ml-auto h-4 w-4 p-0 text-[10px] flex items-center justify-center">
-                                            {compareList.length}
-                                        </Badge>
-                                    )}
-                                </Link>
-                                <Link
-                                    href="/favoritos"
-                                    onClick={() => setOpen(false)}
-                                    className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                                >
-                                    <Heart className="size-4" />
-                                    Favoritos
-                                </Link>
-                                {isPublisher && (
-                                    <div className="border-t border-border mt-2 pt-2">
-                                        <Button className="w-full" asChild>
-                                            <Link href="/publicar" onClick={() => setOpen(false)}>
-                                                <Plus className="size-4" />
-                                                Publicar propiedad
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                )}
                                 <div className="border-t border-border mt-2 pt-2">
                                     <button
                                         onClick={() => { setOpen(false); handleLogout() }}

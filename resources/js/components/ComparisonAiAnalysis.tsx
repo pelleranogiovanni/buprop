@@ -47,12 +47,19 @@ export function ComparisonAiAnalysis({ analysis, loading }: ComparisonAiAnalysis
         </div>
       </div>
 
-      {loading || !analysis ? (
+      {analysis ? null : loading ? (
         <div className="flex items-center gap-2.5 rounded-[8px] bg-muted px-5 py-6 text-[13px] text-muted-foreground">
           <Loader2 className="h-4 w-4 animate-spin text-primary" />
           Analizando las propiedades según tus preferencias…
         </div>
       ) : (
+        <div className="rounded-[8px] bg-muted px-5 py-6 text-[13px] text-muted-foreground">
+          No pudimos generar el análisis en este momento. Podés revisar igualmente la comparación
+          estructurada de arriba.
+        </div>
+      )}
+
+      {analysis && (
         <>
           {/* Resumen */}
           <div className="flex flex-col gap-2 rounded-[8px] border border-[#BFDBFE] bg-[#EFF6FF] px-5 py-4">
