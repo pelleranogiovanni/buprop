@@ -3,28 +3,94 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { VisitRequestForm } from "@/components/VisitRequestForm"
-import { Phone, Mail, MessageCircle } from "lucide-react"
+import { Mail } from "lucide-react"
 import { useState } from "react"
 
 interface ContactFormProps {
   listingId: string
   publisherName: string
-  publisherPhone?: string
+  /** Render sin la Card contenedora, para usar dentro de un modal. */
+  embedded?: boolean
 }
 
-export function ContactForm({ listingId, publisherName, publisherPhone }: ContactFormProps) {
+export function ContactForm({ listingId, publisherName, embedded = false }: ContactFormProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Implementar envío de formulario
-    console.log('Formulario enviado:', formData)
+    // TODO: Conectar con backend (ContactRequestController) cuando esté disponible.
+    console.log("Consulta de contacto:", { ...formData, listingId })
+  }
+
+  const form = (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="contact-name">Nombre completo</Label>
+        <Input
+          id="contact-name"
+          value={formData.name}
+          onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
+          placeholder="Tu nombre"
+          required
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="contact-email">Email</Label>
+        <Input
+          id="contact-email"
+          type="email"
+          value={formData.email}
+          onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
+          placeholder="tu@email.com"
+          required
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="contact-phone">Teléfono</Label>
+        <Input
+          id="contact-phone"
+          type="tel"
+          value={formData.phone}
+          onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+          placeholder="+54 9 11 1234-5678"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="contact-message">Mensaje</Label>
+        <Textarea
+          id="contact-message"
+          value={formData.message}
+          onChange={e => setFormData(prev => ({ ...prev, message: e.target.value }))}
+          placeholder="Hola, me interesa esta propiedad..."
+          rows={4}
+          required
+        />
+      </div>
+
+      <Button type="submit" className="w-full">
+        <Mail className="mr-2 h-4 w-4" />
+        Enviar consulta
+      </Button>
+    </form>
+  )
+
+  if (embedded) {
+    return (
+      <div className="space-y-4">
+        <p className="text-sm text-muted-foreground">
+          Publicado por <span className="font-semibold text-foreground">{publisherName}</span>
+        </p>
+        {form}
+      </div>
+    )
   }
 
   return (
@@ -35,109 +101,7 @@ export function ContactForm({ listingId, publisherName, publisherPhone }: Contac
           Publicado por <span className="font-semibold">{publisherName}</span>
         </p>
       </CardHeader>
-      
-      <CardContent className="space-y-4">
-        {/* Botones de contacto rápido */}
-        <div className="space-y-2">
-          {publisherPhone && (
-            <Button 
-              variant="outline" 
-              className="w-full justify-start"
-              onClick={() => window.open(`tel:${publisherPhone}`)}
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Llamar ahora
-            </Button>
-          )}
-          
-          <Button 
-            variant="outline" 
-            className="w-full justify-start"
-            onClick={() => window.open(`https://wa.me/${publisherPhone?.replace(/\D/g, '')}`)}
-          >
-            <MessageCircle className="w-4 h-4 mr-2" />
-            WhatsApp
-          </Button>
-        </div>
-
-        <div className="border-t pt-4">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Nombre completo</Label>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                placeholder="Tu nombre"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                placeholder="tu@email.com"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="phone">Teléfono</Label>
-              <Input
-                id="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                placeholder="+54 9 11 1234-5678"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="message">Mensaje</Label>
-              <Textarea
-                id="message"
-                value={formData.message}
-                onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                placeholder="Hola, me interesa esta propiedad..."
-                rows={4}
-                required
-              />
-            </div>
-
-            <Button type="submit" className="w-full">
-              <Mail className="w-4 h-4 mr-2" />
-              Enviar consulta
-            </Button>
-          </form>
-        </div>
-      </CardContent>
+      <CardContent>{form}</CardContent>
     </Card>
-  )
-}
-
-interface ContactSectionProps {
-  listingId: string
-  publisherName: string
-  publisherPhone?: string
-}
-
-export function ContactSection({ listingId, publisherName, publisherPhone }: ContactSectionProps) {
-  return (
-    <div className="space-y-6 sticky top-6">
-      <ContactForm
-        listingId={listingId}
-        publisherName={publisherName}
-        publisherPhone={publisherPhone}
-      />
-      
-      <VisitRequestForm
-        listingId={listingId}
-        publisherName={publisherName}
-      />
-    </div>
   )
 }

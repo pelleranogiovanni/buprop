@@ -10,9 +10,11 @@ import { useState } from "react"
 interface VisitRequestFormProps {
   listingId: string
   publisherName: string
+  /** Render sin la Card contenedora, para usar dentro de un modal. */
+  embedded?: boolean
 }
 
-export function VisitRequestForm({ listingId, publisherName }: VisitRequestFormProps) {
+export function VisitRequestForm({ listingId, publisherName, embedded = false }: VisitRequestFormProps) {
   const [selectedDate, setSelectedDate] = useState<Date>()
   const [selectedTime, setSelectedTime] = useState('')
   const [showCalendar, setShowCalendar] = useState(false)
@@ -55,19 +57,7 @@ export function VisitRequestForm({ listingId, publisherName }: VisitRequestFormP
     })
   }
 
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg flex items-center gap-2">
-          <CalendarDays className="w-5 h-5" />
-          Solicitar visita
-        </CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Agenda una visita con {publisherName}
-        </p>
-      </CardHeader>
-      
-      <CardContent>
+  const formBody = (
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Selección de fecha */}
           <div className="space-y-2">
@@ -173,7 +163,31 @@ export function VisitRequestForm({ listingId, publisherName }: VisitRequestFormP
             </>
           )}
         </form>
-      </CardContent>
+  )
+
+  if (embedded) {
+    return (
+      <div className="space-y-4">
+        <p className="text-sm text-muted-foreground">
+          Agenda una visita con {publisherName}
+        </p>
+        {formBody}
+      </div>
+    )
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-lg flex items-center gap-2">
+          <CalendarDays className="w-5 h-5" />
+          Solicitar visita
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">
+          Agenda una visita con {publisherName}
+        </p>
+      </CardHeader>
+      <CardContent>{formBody}</CardContent>
     </Card>
   )
 }

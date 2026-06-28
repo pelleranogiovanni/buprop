@@ -42,6 +42,32 @@ class ListingService
             ->through(fn (Listing $listing) => $this->formatListing($listing));
     }
 
+    public function getSimilar(Listing $listing, int $limit = 3): array
+    {
+        $neighborhoodId = $listing->property->neighborhood_id;
+        $propertyType = $listing->property->property_type;
+
+        return Listing::with([
+            'property.city',
+            'property.neighborhood',
+            'property.coverImage',
+            'publisher:id,name',
+        ])
+            ->available()
+            ->where('listing_id', '!=', $listing->listing_id)
+            ->where('operation_type', $listing->operation_type)
+            ->whereHas('property', function ($query) use ($neighborhoodId, $propertyType) {
+                $query->where('neighborhood_id', $neighborhoodId)
+                    ->orWhere('property_type', $propertyType);
+            })
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->get()
+            ->map(fn (Listing $similar) => $this->formatListing($similar))
+            ->values()
+            ->toArray();
+    }
+
     private function formatListing(Listing $listing): array
     {
         return [
