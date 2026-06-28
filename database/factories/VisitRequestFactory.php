@@ -17,13 +17,11 @@ class VisitRequestFactory extends Factory
             'listing_id' => Listing::factory(),
             'requester_id' => User::role('tenant')->inRandomOrder()->first()?->id ?? User::factory()->create(),
             'preferred_date' => fake()->dateTimeBetween('+1 day', '+1 month')->format('Y-m-d'),
-            'preferred_time_slot' => fake()->randomElement([
-                'Mañana (9:00-12:00)',
-                'Tarde (14:00-17:00)',
-                'Fin de semana mañana',
-                'Fin de semana tarde',
-                'A convenir',
-            ]),
+            'preferred_time_slot' => fake()->randomElement(['morning', 'afternoon', 'evening']),
+            'preferred_time' => fake()->optional()->randomElement(['10:00', '15:00', '18:00']),
+            'alternative_date' => fake()->optional()->dateTimeBetween('+1 month', '+2 months')?->format('Y-m-d'),
+            'comment' => fake()->optional()->sentence(),
+            'contact_phone' => fake()->optional()->numerify('+54 9 3735 ######'),
             'status' => fake()->randomElement(['requested', 'scheduled', 'done', 'cancelled']),
         ];
     }

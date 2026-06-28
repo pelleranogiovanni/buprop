@@ -20,6 +20,10 @@ class VisitRequest extends Model
         'requester_id',
         'preferred_date',
         'preferred_time_slot',
+        'preferred_time',
+        'alternative_date',
+        'comment',
+        'contact_phone',
         'status',
     ];
 
@@ -27,6 +31,7 @@ class VisitRequest extends Model
     {
         return [
             'preferred_date' => 'date',
+            'alternative_date' => 'date',
         ];
     }
 

@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
 
     // Contact requests
     Route::post('/contact-requests', [\App\Http\Controllers\ContactRequestController::class, 'store'])->name('contact-requests.store');
+
+    // Visit requests
+    Route::post('/visit-requests', [\App\Http\Controllers\VisitRequestController::class, 'store'])->name('visit-requests.store');
 });
 
 // Onboarding routes

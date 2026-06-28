@@ -185,7 +185,11 @@ return new class extends Migration {
                 $table->uuid('listing_id');
                 $table->foreignId('requester_id')->constrained('users')->restrictOnDelete();
                 $table->date('preferred_date');
-                $table->string('preferred_time_slot', 30);
+                $table->string('preferred_time_slot', 30); // morning/afternoon/evening
+                $table->string('preferred_time', 20)->nullable(); // horario aproximado (ej. 18:00)
+                $table->date('alternative_date')->nullable();
+                $table->text('comment')->nullable();
+                $table->string('contact_phone', 30)->nullable();
                 $table->string('status', 20); // requested/scheduled/done/cancelled
                 $table->timestampsTz();
                 $table->softDeletesTz();

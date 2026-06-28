@@ -106,6 +106,7 @@ class PropertyController extends Controller
                     ->toArray(),
             ],
             'similarProperties' => $this->listingService->getSimilar($listing, 3),
+            'canRequestVisit'   => auth()->check() && auth()->user()->hasRole('tenant'),
         ]);
     }
 }

@@ -4,6 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
+import {
+  SentVisitsCard, ReceivedVisitsCard,
+  type SentVisit, type ReceivedVisit,
+} from '@/components/VisitRequestsPanel'
 import { Plus, Eye, Edit, Trash2 } from 'lucide-react'
 
 interface Listing {
@@ -34,12 +38,16 @@ interface User {
 
 interface DashboardProps {
   listings: Listing[]
+  sentVisits?: SentVisit[]
+  receivedVisits?: ReceivedVisit[]
   auth: {
     user: User
   }
 }
 
-export default function Dashboard({ listings = [], auth }: DashboardProps) {
+export default function Dashboard({ listings = [], sentVisits = [], receivedVisits = [], auth }: DashboardProps) {
+  const isTenant = auth.user.roles?.some(role => role.name === 'tenant')
+  const isPublisher = auth.user.roles?.some(role => ['owner', 'agency', 'admin'].includes(role.name))
   const getStatusBadge = (status: string) => {
     const statusConfig = {
       pending: { label: 'Pendiente', variant: 'secondary' as const },
@@ -148,7 +156,9 @@ export default function Dashboard({ listings = [], auth }: DashboardProps) {
               </Card>
             </div>
 
-
+            {/* Solicitudes de visita */}
+            {isPublisher && <ReceivedVisitsCard visits={receivedVisits} />}
+            {isTenant && <SentVisitsCard visits={sentVisits} />}
 
             {/* Listings Table */}
             <Card>

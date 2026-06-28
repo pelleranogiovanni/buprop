@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\VisitRequestService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
+    public function __construct(
+        private readonly VisitRequestService $visitRequestService
+    ) {}
+
     public function index()
     {
         $user = auth()->user();
@@ -53,8 +58,16 @@ class DashboardController extends Controller
             })
             ->toArray();
 
+        $isPublisher = $user->hasAnyRole(['owner', 'agency', 'admin']);
+
         return Inertia::render('dashboard', [
             'listings' => $listings,
+            'sentVisits' => $user->hasRole('tenant')
+                ? $this->visitRequestService->getSentFor($user)
+                : [],
+            'receivedVisits' => $isPublisher
+                ? $this->visitRequestService->getReceivedFor($user)
+                : [],
             'auth' => [
                 'user' => $user->load('roles')
             ]

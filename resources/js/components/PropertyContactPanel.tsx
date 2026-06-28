@@ -1,8 +1,5 @@
 import { useState } from "react"
-import {
-  Dialog, DialogContent, DialogHeader, DialogTitle,
-} from "@/components/ui/dialog"
-import { VisitRequestForm } from "@/components/VisitRequestForm"
+import { VisitRequestModal } from "@/components/VisitRequestModal"
 import { ContactRequestModal } from "@/components/ContactRequestModal"
 import { AccessRequiredModal } from "@/components/AccessRequiredModal"
 import { useCompare } from "@/contexts/CompareContext"
@@ -39,6 +36,7 @@ interface PropertyContactPanelProps {
   }
   authUser?: AuthUser | null
   allowMessages?: boolean
+  canRequestVisit?: boolean
 }
 
 const availabilityLabels: Record<string, string> = {
@@ -69,7 +67,7 @@ function getInitials(name: string) {
     .join("")
 }
 
-export function PropertyContactPanel({ property, authUser = null, allowMessages = true }: PropertyContactPanelProps) {
+export function PropertyContactPanel({ property, authUser = null, allowMessages = true, canRequestVisit = false }: PropertyContactPanelProps) {
   const { addToCompare, removeFromCompare, isInCompare } = useCompare()
   const [contactOpen, setContactOpen] = useState(false)
   const [visitOpen, setVisitOpen] = useState(false)
@@ -85,7 +83,7 @@ export function PropertyContactPanel({ property, authUser = null, allowMessages 
     : typeText
 
   const handleContact = () => (authUser ? setContactOpen(true) : setAccessOpen(true))
-  const handleVisit = () => (authUser ? setVisitOpen(true) : setAccessOpen(true))
+  const handleVisit = () => (authUser && canRequestVisit ? setVisitOpen(true) : setAccessOpen(true))
 
   const toggleCompare = () => {
     if (inCompare) {
@@ -226,14 +224,25 @@ export function PropertyContactPanel({ property, authUser = null, allowMessages 
             user={{ name: authUser.name, email: authUser.email, phone: authUser.phone }}
           />
 
-          <Dialog open={visitOpen} onOpenChange={setVisitOpen}>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Solicitar visita</DialogTitle>
-              </DialogHeader>
-              <VisitRequestForm listingId={property.listing_id} publisherName={property.publisher_name} embedded />
-            </DialogContent>
-          </Dialog>
+          {canRequestVisit && (
+            <VisitRequestModal
+              open={visitOpen}
+              onOpenChange={setVisitOpen}
+              publisherName={property.publisher_name}
+              property={{
+                listing_id: property.listing_id,
+                title: property.title,
+                price: property.price,
+                currency: property.currency,
+                operation_type: property.operation_type,
+                neighborhood_name: property.neighborhood_name,
+                city_name: property.city_name,
+                availability_status: property.availability_status,
+                cover_image: property.cover_image,
+              }}
+              user={{ name: authUser.name, email: authUser.email, phone: authUser.phone }}
+            />
+          )}
         </>
       )}
 

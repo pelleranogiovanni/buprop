@@ -64,6 +64,7 @@ interface Property {
 interface PropertyDetailProps {
   property: Property
   similarProperties?: SimilarProperty[]
+  canRequestVisit?: boolean
 }
 
 const propertyTypeLabels: Record<string, string> = {
@@ -74,7 +75,7 @@ const propertyTypeLabels: Record<string, string> = {
 
 const CONTAINER = "mx-auto w-full max-w-[1200px] px-6 lg:px-0"
 
-export default function PropertyDetail({ property, similarProperties }: PropertyDetailProps) {
+export default function PropertyDetail({ property, similarProperties, canRequestVisit }: PropertyDetailProps) {
   const { auth } = usePage<{
     auth: { user?: { id: number; name: string; email: string; phone?: string; roles?: Array<{ name: string }> } | null }
   }>().props
@@ -144,6 +145,7 @@ export default function PropertyDetail({ property, similarProperties }: Property
                 property={{ ...property, title: pageTitle, cover_image: coverImage }}
                 authUser={auth?.user ?? null}
                 allowMessages={property.allow_messages}
+                canRequestVisit={canRequestVisit}
               />
             </div>
           </div>
