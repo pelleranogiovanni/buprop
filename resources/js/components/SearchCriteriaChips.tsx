@@ -9,6 +9,8 @@ interface Filters {
   max_price?: string
   bedrooms?: string
   q?: string
+  sort?: string
+  features?: string[]
 }
 
 interface Neighborhood {
@@ -40,6 +42,14 @@ const BEDROOM_LABEL: Record<string, string> = {
   '4': '4+ dorm.',
 }
 
+const FEATURE_LABELS: Record<string, string> = {
+  garage: 'Garaje / Cochera',
+  pool: 'Pileta / Piscina',
+  air_conditioning: 'Aire acondicionado',
+  furnished: 'Amueblado',
+  pets: 'Apto mascotas',
+}
+
 export function SearchCriteriaChips({
   filters,
   neighborhoods = [],
@@ -63,7 +73,12 @@ export function SearchCriteriaChips({
   if (filters.bedrooms)
     chips.push({ key: 'bedrooms', label: BEDROOM_LABEL[filters.bedrooms] ?? `${filters.bedrooms} dorm.` })
 
-  if (chips.length === 0) return null
+  const featureChips = (filters.features ?? []).map(f => ({
+    value: f,
+    label: FEATURE_LABELS[f] ?? f,
+  }))
+
+  if (chips.length === 0 && featureChips.length === 0) return null
 
   const removeFilter = (key: keyof Filters) => {
     const next = { ...filters, [key]: undefined }
@@ -71,6 +86,13 @@ export function SearchCriteriaChips({
       if (next[k as keyof Filters] === undefined) delete next[k as keyof Filters]
     })
     router.get(basePath, next, { preserveState: true, preserveScroll: true })
+  }
+
+  const removeFeature = (value: string) => {
+    const remaining = (filters.features ?? []).filter(f => f !== value)
+    const next: Filters = { ...filters, features: remaining.length > 0 ? remaining : undefined }
+    if (!next.features) delete next.features
+    router.get(basePath, next as Record<string, string | string[]>, { preserveState: true, preserveScroll: true })
   }
 
   const clearAll = () => {
@@ -84,6 +106,18 @@ export function SearchCriteriaChips({
           key={chip.key}
           type="button"
           onClick={() => removeFilter(chip.key)}
+          className="flex items-center gap-1.5 rounded-full border border-primary/50 bg-primary-light px-3 py-[5px] transition-opacity hover:opacity-80"
+        >
+          <span className="text-xs font-semibold text-primary">{chip.label}</span>
+          <X className="h-[11px] w-[11px] text-primary" />
+        </button>
+      ))}
+
+      {featureChips.map(chip => (
+        <button
+          key={`feat-${chip.value}`}
+          type="button"
+          onClick={() => removeFeature(chip.value)}
           className="flex items-center gap-1.5 rounded-full border border-primary/50 bg-primary-light px-3 py-[5px] transition-opacity hover:opacity-80"
         >
           <span className="text-xs font-semibold text-primary">{chip.label}</span>

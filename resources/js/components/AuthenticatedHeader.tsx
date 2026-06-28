@@ -28,7 +28,7 @@ interface AuthenticatedHeaderProps {
 
 const navItems = [
     { href: "/", label: "Inicio" },
-    { href: "/propiedades", label: "Propiedades" },
+    { href: "/properties", label: "Propiedades" },
     { href: "/contacto", label: "Contacto" },
 ]
 
@@ -38,7 +38,7 @@ function HeaderSearchBar() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (query.trim()) {
-            router.get("/", { q: query.trim() }, { preserveState: false })
+            router.get("/properties", { q: query.trim() }, { preserveState: false })
         }
     }
 

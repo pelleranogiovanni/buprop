@@ -46410,6 +46410,1997 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "gn5G3",
+      "x": 26949,
+      "y": 3806,
+      "name": "Home – Panel del interesado",
+      "clip": true,
+      "width": 1440,
+      "fill": "$bg-base",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "cW5wJ",
+          "type": "ref",
+          "ref": "vi4Xh",
+          "name": "Header Panel",
+          "width": "fill_container",
+          "descendants": {
+            "ZE5VE": {
+              "width": "fill_container"
+            },
+            "xfYdW": {
+              "enabled": false
+            },
+            "QVjBI": {
+              "content": "Publicar propiedad"
+            },
+            "N7TkYa": {
+              "enabled": false
+            },
+            "kGpj9": {
+              "type": "frame",
+              "id": "zZix0",
+              "name": "User Menu",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-md",
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "gap": 8,
+              "padding": [
+                6,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "F7gff",
+                  "name": "Avatar",
+                  "width": 28,
+                  "height": 28,
+                  "fill": "$primary",
+                  "cornerRadius": 14,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "GcWZD",
+                      "name": "I",
+                      "fill": "$primary-foreground",
+                      "content": "J",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "jo8ez",
+                  "name": "Mi Cuenta",
+                  "fill": "$text-primary",
+                  "content": "Mi cuenta",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            "tg0Qj": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "C0Awx",
+          "name": "Nav Bar",
+          "width": "fill_container",
+          "fill": "$bg-surface",
+          "stroke": "$border",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "justifyContent": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "p710d",
+              "name": "Nav Inner",
+              "width": 1200,
+              "padding": [
+                14,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Gtec0",
+                  "name": "Bc",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PSRUh",
+                      "name": "L1",
+                      "fill": "$primary",
+                      "content": "Inicio",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "pzVBF",
+                      "name": "S",
+                      "width": 12,
+                      "height": 12,
+                      "icon": "chevron-right",
+                      "library": "lucide",
+                      "fill": "$text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "D4ZQJp",
+                      "name": "L2",
+                      "fill": "$text-primary",
+                      "content": "Mi panel",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "kCJXu",
+          "name": "Inner",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            40,
+            120,
+            64,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "dHOe7",
+              "name": "Page Head",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "UAHV9",
+                  "name": "Greet Row",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JCHjP",
+                      "name": "Greeting",
+                      "fill": "$text-primary",
+                      "content": "Hola, Giovanni.",
+                      "fontFamily": "Inter",
+                      "fontSize": 28,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "LtakP",
+                      "name": "Role Badge",
+                      "fill": "#EEF2FF",
+                      "cornerRadius": 20,
+                      "stroke": "#C7D2FE",
+                      "strokeWidth": 1,
+                      "gap": 5,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "rD6MD",
+                          "name": "Ic",
+                          "width": 11,
+                          "height": 11,
+                          "icon": "user",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "y2hPG",
+                          "name": "L",
+                          "fill": "$primary",
+                          "content": "Interesado",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "I8O5Xi",
+                  "name": "Subtitle",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Continuá buscando propiedades, revisá tus preferencias y seguí tus consultas desde un solo lugar.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LneYP",
+              "name": "Quick Search",
+              "width": "fill_container",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-lg",
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 14,
+              "padding": [
+                24,
+                28
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "p9h2P",
+                  "name": "Search Title",
+                  "fill": "$text-primary",
+                  "content": "¿Qué propiedad estás buscando?",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "udI9e",
+                  "name": "Search Row",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "T0pGr",
+                      "name": "Search Box",
+                      "width": "fill_container",
+                      "fill": "$bg-base",
+                      "cornerRadius": "$radius-md",
+                      "stroke": "$border-input",
+                      "strokeWidth": 1,
+                      "gap": 10,
+                      "padding": [
+                        13,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "CUeTd",
+                          "name": "Ic",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "search",
+                          "library": "lucide",
+                          "fill": "$text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wMePt",
+                          "name": "Ph",
+                          "fill": "$text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Ej. Casa en alquiler con 2 dormitorios, patio y hasta AR$ 300.000",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "y4L3Cr",
+                      "name": "Search Btn",
+                      "fill": "$primary",
+                      "cornerRadius": "$radius-md",
+                      "gap": 6,
+                      "padding": [
+                        13,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "cfMKC",
+                          "name": "Ic",
+                          "width": 15,
+                          "height": 15,
+                          "icon": "search",
+                          "library": "lucide",
+                          "fill": "$primary-foreground"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qZq9E",
+                          "name": "L",
+                          "fill": "$primary-foreground",
+                          "content": "Buscar propiedades",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "j45h5",
+                  "name": "Filter Link",
+                  "fill": "$primary",
+                  "content": "Usar filtros tradicionales →",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Erdiu",
+              "name": "Quick Access",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "VTRHE",
+                  "name": "Mis preferencias",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-lg",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cF7A2",
+                      "name": "Icon Wrap",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "ZYGwg",
+                          "name": "Ic",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "settings-2",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "cscdL",
+                      "name": "Title",
+                      "fill": "$text-primary",
+                      "content": "Mis preferencias",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H6wkw9",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Revisá o actualizá los criterios que usás para buscar.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Sbf8Z",
+                      "name": "Btn",
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "s6gxhv",
+                          "name": "L",
+                          "fill": "$primary",
+                          "content": "Editar preferencias",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OwVqN",
+                  "name": "Buscar propiedades",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-lg",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "teoxr",
+                      "name": "Icon Wrap",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "eDyNC",
+                          "name": "Ic",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "search",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZpIOH",
+                      "name": "Title",
+                      "fill": "$text-primary",
+                      "content": "Buscar propiedades",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "COQfD",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Explorá publicaciones disponibles en Villa Ángela.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "T3s0Qp",
+                      "name": "Btn",
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "iRb7C",
+                          "name": "L",
+                          "fill": "$primary",
+                          "content": "Ver propiedades",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dv4x8",
+                  "name": "Comparar propiedades",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-lg",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "M3B3Zb",
+                      "name": "Icon Wrap",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "c8krR",
+                          "name": "Ic",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "layout-grid",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "b7gsW",
+                      "name": "Title",
+                      "fill": "$text-primary",
+                      "content": "Comparar propiedades",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pp4uU",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Compará propiedades seleccionadas por precio, ubicación y características.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yitqO",
+                      "name": "Btn",
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "CWN08",
+                          "name": "L",
+                          "fill": "$primary",
+                          "content": "Ir a comparación",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Hu85V",
+                  "name": "Mis consultas",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-lg",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "hNu76",
+                      "name": "Icon Wrap",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "l7ura",
+                          "name": "Ic",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "mail",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "r8Ncnw",
+                      "name": "Title",
+                      "fill": "$text-primary",
+                      "content": "Mis consultas",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "blsRw",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Revisá las consultas enviadas a publicaciones.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "De5Vg",
+                      "name": "Btn",
+                      "fill": "$primary-light",
+                      "cornerRadius": "$radius-md",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "koUWb",
+                          "name": "L",
+                          "fill": "$primary",
+                          "content": "Ver consultas",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "T96eP",
+              "name": "Preferencias Card",
+              "width": "fill_container",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-lg",
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dxwDa",
+                  "name": "Pref Head",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cB1hi",
+                      "name": "Pref Title",
+                      "fill": "$text-primary",
+                      "content": "Tus preferencias de búsqueda",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "iNsNn",
+                      "name": "Edit Btn",
+                      "fill": "$bg-muted",
+                      "cornerRadius": "$radius-md",
+                      "gap": 6,
+                      "padding": [
+                        7,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "TDkOp",
+                          "name": "Ic",
+                          "width": 13,
+                          "height": 13,
+                          "icon": "pencil",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "baubQ",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Editar preferencias",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "R1Lhb9",
+                  "name": "Pref Chips",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Qliqr",
+                      "name": "Alquiler",
+                      "fill": "$bg-muted",
+                      "cornerRadius": 20,
+                      "gap": 5,
+                      "padding": [
+                        5,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "C9IDMZ",
+                          "name": "Ic",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "tag",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "QvMYs",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Alquiler",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "P9VCr",
+                      "name": "Casa",
+                      "fill": "$bg-muted",
+                      "cornerRadius": 20,
+                      "gap": 5,
+                      "padding": [
+                        5,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "TfyR4",
+                          "name": "Ic",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "house",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hbvrV",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Casa",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "qUxzt",
+                      "name": "Villa Ángela – Centro",
+                      "fill": "$bg-muted",
+                      "cornerRadius": 20,
+                      "gap": 5,
+                      "padding": [
+                        5,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "mYuJ5",
+                          "name": "Ic",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "map-pin",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "O38TGn",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Villa Ángela – Centro",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mlZNz",
+                      "name": "hasta AR$ 300.000",
+                      "fill": "$bg-muted",
+                      "cornerRadius": 20,
+                      "gap": 5,
+                      "padding": [
+                        5,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "YioGR",
+                          "name": "Ic",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "banknote",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "KAuwy",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "hasta AR$ 300.000",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dM2wt",
+                      "name": "2 o más dorm.",
+                      "fill": "$bg-muted",
+                      "cornerRadius": 20,
+                      "gap": 5,
+                      "padding": [
+                        5,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "qdjbD",
+                          "name": "Ic",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "bed",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xVXRW",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "2 o más dorm.",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "E6njld",
+                      "name": "patio, garaje",
+                      "fill": "$bg-muted",
+                      "cornerRadius": 20,
+                      "gap": 5,
+                      "padding": [
+                        5,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "S7kH8V",
+                          "name": "Ic",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "tree-pine",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "O8th6j",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "patio, garaje",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "PKQqx",
+                  "name": "Pref Note",
+                  "fill": "$text-muted",
+                  "content": "Podés modificar tus preferencias cuando quieras.",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "U3x4Hz",
+              "name": "Props Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "HruuP",
+                  "name": "Props Head",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wDPcI",
+                      "name": "Props Title",
+                      "fill": "$text-primary",
+                      "content": "Propiedades para revisar",
+                      "fontFamily": "Inter",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LcfC4",
+                      "name": "Props Sub",
+                      "fill": "$text-secondary",
+                      "content": "Estas propiedades coinciden con algunos de tus criterios de búsqueda.",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "tVXhZ",
+                  "name": "Props Row",
+                  "width": "fill_container",
+                  "gap": 20,
+                  "children": [
+                    {
+                      "id": "n14QG2",
+                      "type": "ref",
+                      "ref": "XEV3V",
+                      "name": "Casa en alquiler con patio",
+                      "width": "fill_container",
+                      "descendants": {
+                        "IMSod": {
+                          "fill": "$badge-rent-bg",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "l2q8P",
+                              "name": "T",
+                              "fill": "$badge-rent",
+                              "content": "Alquiler",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        "p2kIv": {
+                          "content": "AR$ 280.000/mes"
+                        },
+                        "AFvUu": {
+                          "content": "Casa en alquiler con patio"
+                        },
+                        "LTIgb": {
+                          "content": "Barrio Centro"
+                        },
+                        "GlxfH": {
+                          "content": "3 dorm."
+                        },
+                        "PmvKA": {
+                          "content": "2 baños"
+                        },
+                        "k0r0K": {
+                          "content": "120 m²"
+                        },
+                        "iORpK": {
+                          "content": "Disponible"
+                        },
+                        "jNI28": {
+                          "content": "Ver propiedad"
+                        }
+                      }
+                    },
+                    {
+                      "id": "hVjxk",
+                      "type": "ref",
+                      "ref": "XEV3V",
+                      "name": "Departamento céntrico en alquiler",
+                      "width": "fill_container",
+                      "descendants": {
+                        "IMSod": {
+                          "fill": "$badge-rent-bg",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uCXJq",
+                              "name": "T",
+                              "fill": "$badge-rent",
+                              "content": "Alquiler",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        "p2kIv": {
+                          "content": "AR$ 220.000/mes"
+                        },
+                        "AFvUu": {
+                          "content": "Departamento céntrico en alquiler"
+                        },
+                        "LTIgb": {
+                          "content": "Centro"
+                        },
+                        "GlxfH": {
+                          "content": "2 dorm."
+                        },
+                        "PmvKA": {
+                          "content": "1 baño"
+                        },
+                        "k0r0K": {
+                          "content": "65 m²"
+                        },
+                        "iORpK": {
+                          "content": "Disponible"
+                        },
+                        "jNI28": {
+                          "content": "Ver propiedad"
+                        }
+                      }
+                    },
+                    {
+                      "id": "l1LgYr",
+                      "type": "ref",
+                      "ref": "XEV3V",
+                      "name": "Casa con garaje",
+                      "width": "fill_container",
+                      "descendants": {
+                        "IMSod": {
+                          "fill": "$badge-rent-bg",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uo6eU",
+                              "name": "T",
+                              "fill": "$badge-rent",
+                              "content": "Alquiler",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        "p2kIv": {
+                          "content": "AR$ 310.000/mes"
+                        },
+                        "AFvUu": {
+                          "content": "Casa con garaje"
+                        },
+                        "LTIgb": {
+                          "content": "Barrio 279 Viviendas"
+                        },
+                        "GlxfH": {
+                          "content": "3 dorm."
+                        },
+                        "PmvKA": {
+                          "content": "2 baños"
+                        },
+                        "k0r0K": {
+                          "content": "140 m²"
+                        },
+                        "iORpK": {
+                          "content": "Disponible"
+                        },
+                        "jNI28": {
+                          "content": "Ver propiedad"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SSB5a",
+              "name": "Queries Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "i4VPTm",
+                  "name": "Q Head",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "drMoK",
+                      "name": "Q Title",
+                      "fill": "$text-primary",
+                      "content": "Consultas recientes",
+                      "fontFamily": "Inter",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "i3lNSF",
+                      "name": "Q All",
+                      "fill": "$primary",
+                      "content": "Ver todas las consultas →",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZoBHc",
+                  "name": "Casa en alquiler con patio",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-md",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "gap": 16,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "M2rHf",
+                      "name": "Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "K8Zao",
+                          "name": "Top",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "g0WHCH",
+                              "name": "Prop",
+                              "fill": "$text-primary",
+                              "content": "Casa en alquiler con patio",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "bh2JC",
+                              "name": "Status",
+                              "fill": "#DBEAFE",
+                              "cornerRadius": 20,
+                              "padding": [
+                                3,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "IgHD5",
+                                  "name": "L",
+                                  "fill": "$primary",
+                                  "content": "Enviada",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "zUhrd",
+                          "name": "Pub",
+                          "fill": "$text-muted",
+                          "content": "Inmobiliaria Centro · 12/06/2026",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zrdwL",
+                          "name": "Msg",
+                          "fill": "$text-secondary",
+                          "content": "Solicité información sobre requisitos y disponibilidad.",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "k31ho",
+                      "name": "Det Btn",
+                      "fill": "$bg-muted",
+                      "cornerRadius": "$radius-md",
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NLXJI",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Ver detalle",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fCWEZ",
+                  "name": "Departamento céntrico en alquiler",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-md",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "gap": 16,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cs8fX",
+                      "name": "Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Y7K4t6",
+                          "name": "Top",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "YOq29",
+                              "name": "Prop",
+                              "fill": "$text-primary",
+                              "content": "Departamento céntrico en alquiler",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "iUjHW",
+                              "name": "Status",
+                              "fill": "#DBEAFE",
+                              "cornerRadius": 20,
+                              "padding": [
+                                3,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BGaJW",
+                                  "name": "L",
+                                  "fill": "$primary",
+                                  "content": "Enviada",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZJO5l",
+                          "name": "Pub",
+                          "fill": "$text-muted",
+                          "content": "Propietario particular · 10/06/2026",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Pb6th",
+                          "name": "Msg",
+                          "fill": "$text-secondary",
+                          "content": "Consulté por condiciones de ingreso.",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gY7el",
+                      "name": "Det Btn",
+                      "fill": "$bg-muted",
+                      "cornerRadius": "$radius-md",
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "W5qrP",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Ver detalle",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nYqdc",
+              "name": "Visits Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "UROgF",
+                  "name": "V Head",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dDD0e",
+                      "name": "V Title",
+                      "fill": "$text-primary",
+                      "content": "Solicitudes de visita",
+                      "fontFamily": "Inter",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kPyne",
+                      "name": "V All",
+                      "fill": "$primary",
+                      "content": "Ver todas las solicitudes →",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KEQgp",
+                  "name": "Casa en alquiler con patio – visita",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-md",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "gap": 16,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "f4a4ST",
+                      "name": "Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "mXbvE",
+                          "name": "Top",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "C1FI6g",
+                              "name": "Prop",
+                              "fill": "$text-primary",
+                              "content": "Casa en alquiler con patio",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "pOJaB",
+                              "name": "Status",
+                              "fill": "#FEF3C7",
+                              "cornerRadius": 20,
+                              "padding": [
+                                3,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "J35rC",
+                                  "name": "L",
+                                  "fill": "#92400E",
+                                  "content": "Pendiente de confirmación",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "K041JR",
+                          "name": "Meta",
+                          "fill": "$text-muted",
+                          "content": "Inmobiliaria Centro · 05/07/2026 · Franja: Tarde",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "W1k9SC",
+                      "name": "Det Btn",
+                      "fill": "$bg-muted",
+                      "cornerRadius": "$radius-md",
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qclC4",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Ver detalle",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vyAl4",
+                  "name": "Casa con garaje – visita",
+                  "width": "fill_container",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-md",
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "gap": 16,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "nPrWK",
+                      "name": "Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "febgF",
+                          "name": "Top",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "N7S61",
+                              "name": "Prop",
+                              "fill": "$text-primary",
+                              "content": "Casa con garaje",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "L5Qnz",
+                              "name": "Status",
+                              "fill": "#DBEAFE",
+                              "cornerRadius": 20,
+                              "padding": [
+                                3,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "mJZwd",
+                                  "name": "L",
+                                  "fill": "#1E3A8A",
+                                  "content": "Enviada",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "v4fJaq",
+                          "name": "Meta",
+                          "fill": "$text-muted",
+                          "content": "Inmobiliaria Norte · 08/07/2026 · Franja: Mañana",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "k409bw",
+                      "name": "Det Btn",
+                      "fill": "$bg-muted",
+                      "cornerRadius": "$radius-md",
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "giCVE",
+                          "name": "L",
+                          "fill": "$text-secondary",
+                          "content": "Ver detalle",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "vbR1e",
+          "type": "ref",
+          "ref": "EZHl8",
+          "name": "Footer Panel",
+          "width": "fill_container"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "oZiWG",
+      "x": 28449,
+      "y": 3806,
+      "name": "Panel – Empty States",
+      "width": 1000,
+      "fill": "$bg-base",
+      "cornerRadius": "$radius-xl",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "type": "text",
+          "id": "k67SWQ",
+          "name": "Label",
+          "fill": "$text-muted",
+          "content": "Variantes de estado vacío",
+          "fontFamily": "Inter",
+          "fontSize": 11,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "d3YUEl",
+          "name": "Row",
+          "width": "fill_container",
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "lIK0F",
+              "name": "Sin preferencias cargadas",
+              "width": "fill_container",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-lg",
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "t1WTX",
+                  "name": "Ic Wrap",
+                  "width": 44,
+                  "height": 44,
+                  "fill": "$bg-muted",
+                  "cornerRadius": 22,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "SMPew",
+                      "name": "Ic",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "settings-2",
+                      "library": "lucide",
+                      "fill": "$text-muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Mvz7T",
+                  "name": "T",
+                  "fill": "$text-primary",
+                  "content": "Sin preferencias cargadas",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "zZqRC",
+                  "name": "B",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Todavía no cargaste preferencias de búsqueda. Cargar tus preferencias ayuda a mejorar futuras búsquedas y comparaciones.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "p3LFvD",
+                  "name": "Btn",
+                  "fill": "$primary",
+                  "cornerRadius": "$radius-md",
+                  "padding": [
+                    9,
+                    18
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nu8mq",
+                      "name": "L",
+                      "fill": "$primary-foreground",
+                      "content": "Cargar preferencias",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ive7J",
+              "name": "Sin consultas",
+              "width": "fill_container",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-lg",
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "O2VwPr",
+                  "name": "Ic Wrap",
+                  "width": 44,
+                  "height": 44,
+                  "fill": "$bg-muted",
+                  "cornerRadius": 22,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "XIvDx",
+                      "name": "Ic",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "mail",
+                      "library": "lucide",
+                      "fill": "$text-muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "TAsyH",
+                  "name": "T",
+                  "fill": "$text-primary",
+                  "content": "Sin consultas",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "siOtf",
+                  "name": "B",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Todavía no enviaste consultas. Cuando contactes una publicación, la consulta aparecerá en esta sección.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "k0OM43",
+              "name": "Sin solicitudes de visita",
+              "width": "fill_container",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-lg",
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "RwNNB",
+                  "name": "Ic Wrap",
+                  "width": 44,
+                  "height": 44,
+                  "fill": "$bg-muted",
+                  "cornerRadius": 22,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "B62pg",
+                      "name": "Ic",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "calendar",
+                      "library": "lucide",
+                      "fill": "$text-muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "FyGWI",
+                  "name": "T",
+                  "fill": "$text-primary",
+                  "content": "Sin solicitudes de visita",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "U3EtdC",
+                  "name": "B",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Todavía no solicitaste visitas. Cuando solicites visitar una propiedad, la solicitud aparecerá en esta sección.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

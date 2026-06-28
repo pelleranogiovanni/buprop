@@ -4,15 +4,24 @@ import { router } from '@inertiajs/react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { cn } from '@/lib/utils'
 
+interface Neighborhood {
+  neighborhood_id: string
+  name: string
+}
+
 interface FilterPanelProps {
   initialFilters?: {
     operation_type?: string
     property_type?: string
+    neighborhood_id?: string
     min_price?: string
     max_price?: string
     bedrooms?: string
     q?: string
+    sort?: string
+    features?: string[]
   }
+  neighborhoods?: Neighborhood[]
   basePath?: string
 }
 
@@ -24,42 +33,59 @@ const PROPERTY_TYPES = [
 
 const BEDROOM_OPTIONS = ['1', '2', '3', '4']
 
-const FEATURES = [
-  'Garaje / Cochera',
-  'Pileta / Piscina',
-  'Aire acondicionado',
-  'Amueblado',
-  'Apto mascotas',
+const FEATURE_OPTIONS = [
+  { value: 'garage', label: 'Garaje / Cochera' },
+  { value: 'pool', label: 'Pileta / Piscina' },
+  { value: 'air_conditioning', label: 'Aire acondicionado' },
+  { value: 'furnished', label: 'Amueblado' },
+  { value: 'pets', label: 'Apto mascotas' },
 ]
 
-export function FilterPanel({ initialFilters = {}, basePath = '/properties' }: FilterPanelProps) {
+export function FilterPanel({
+  initialFilters = {},
+  neighborhoods = [],
+  basePath = '/properties',
+}: FilterPanelProps) {
   const [op, setOp] = useState(initialFilters.operation_type ?? '')
   const [propType, setPropType] = useState(initialFilters.property_type ?? '')
+  const [neighborhoodId, setNeighborhoodId] = useState(initialFilters.neighborhood_id ?? '')
   const [minPrice, setMinPrice] = useState(initialFilters.min_price ?? '')
   const [maxPrice, setMaxPrice] = useState(initialFilters.max_price ?? '')
   const [bedrooms, setBedrooms] = useState(initialFilters.bedrooms ?? '')
+  const [features, setFeatures] = useState<string[]>(
+    Array.isArray(initialFilters.features) ? initialFilters.features : []
+  )
 
   const toggleOp = (value: string) => setOp(prev => (prev === value ? '' : value))
   const toggleType = (value: string) => setPropType(prev => (prev === value ? '' : value))
   const toggleBedrooms = (value: string) => setBedrooms(prev => (prev === value ? '' : value))
+  const toggleFeature = (value: string) =>
+    setFeatures(prev =>
+      prev.includes(value) ? prev.filter(f => f !== value) : [...prev, value]
+    )
 
   const handleApply = () => {
-    const params: Record<string, string> = {}
+    const params: Record<string, string | string[]> = {}
     if (initialFilters.q) params.q = initialFilters.q
+    if (initialFilters.sort) params.sort = initialFilters.sort
     if (op) params.operation_type = op
     if (propType) params.property_type = propType
+    if (neighborhoodId && neighborhoodId !== 'all') params.neighborhood_id = neighborhoodId
     if (minPrice) params.min_price = minPrice
     if (maxPrice) params.max_price = maxPrice
     if (bedrooms) params.bedrooms = bedrooms
+    if (features.length > 0) params.features = features
     router.get(basePath, params)
   }
 
   const handleClear = () => {
     setOp('')
     setPropType('')
+    setNeighborhoodId('')
     setMinPrice('')
     setMaxPrice('')
     setBedrooms('')
+    setFeatures([])
     const params = initialFilters.q ? { q: initialFilters.q } : {}
     router.get(basePath, params)
   }
@@ -126,6 +152,25 @@ export function FilterPanel({ initialFilters = {}, basePath = '/properties' }: F
           ))}
         </div>
 
+        {/* Zona / Barrio */}
+        {neighborhoods.length > 0 && (
+          <div className="flex flex-col gap-3 px-5 py-4">
+            <span className="text-[13px] font-semibold text-foreground">Zona / Barrio</span>
+            <select
+              value={neighborhoodId}
+              onChange={e => setNeighborhoodId(e.target.value)}
+              className="h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus:border-primary"
+            >
+              <option value="">Todos los barrios</option>
+              {neighborhoods.map(n => (
+                <option key={n.neighborhood_id} value={n.neighborhood_id}>
+                  {n.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         {/* Rango de precio */}
         <div className="flex flex-col gap-3 px-5 py-4">
           <span className="text-[13px] font-semibold text-foreground">Rango de precio</span>
@@ -172,14 +217,18 @@ export function FilterPanel({ initialFilters = {}, basePath = '/properties' }: F
         {/* Características */}
         <div className="flex flex-col gap-3 px-5 py-4">
           <span className="text-[13px] font-semibold text-foreground">Características</span>
-          {FEATURES.map(feat => (
-            <div key={feat} className="flex items-center gap-2.5">
-              <Checkbox id={`feat-${feat}`} />
+          {FEATURE_OPTIONS.map(({ value, label }) => (
+            <div key={value} className="flex items-center gap-2.5">
+              <Checkbox
+                id={`feat-${value}`}
+                checked={features.includes(value)}
+                onCheckedChange={() => toggleFeature(value)}
+              />
               <label
-                htmlFor={`feat-${feat}`}
+                htmlFor={`feat-${value}`}
                 className="cursor-pointer select-none text-sm text-foreground"
               >
-                {feat}
+                {label}
               </label>
             </div>
           ))}

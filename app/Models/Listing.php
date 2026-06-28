@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -74,65 +75,69 @@ class Listing extends Model
                     ->where('moderation_status', 'approved');
     }
 
-    public function scopeWithFilters($query, array $filters)
+    public function scopeWithFilters(Builder $query, array $filters): Builder
     {
-        return $query->when($filters['operation_type'] ?? null, function ($query, $operationType) {
-                return $query->where('operation_type', $operationType);
-            })
-            ->when($filters['min_price'] ?? null, function ($query, $minPrice) {
-                return $query->where('price', '>=', $minPrice);
-            })
-            ->when($filters['max_price'] ?? null, function ($query, $maxPrice) {
-                return $query->where('price', '<=', $maxPrice);
-            });
+        return $query
+            ->when($filters['operation_type'] ?? null, fn (Builder $q, string $val) =>
+                $q->where('operation_type', $val)
+            )
+            ->when($filters['min_price'] ?? null, fn (Builder $q, string $val) =>
+                $q->where('price', '>=', $val)
+            )
+            ->when($filters['max_price'] ?? null, fn (Builder $q, string $val) =>
+                $q->where('price', '<=', $val)
+            )
+            ->when($filters['property_type'] ?? null, fn (Builder $q, string $val) =>
+                $q->whereHas('property', fn (Builder $p) => $p->where('property_type', $val))
+            )
+            ->when(
+                filled($filters['neighborhood_id'] ?? null) && ($filters['neighborhood_id'] ?? null) !== 'all',
+                fn (Builder $q) => $q->whereHas('property', fn (Builder $p) =>
+                    $p->where('neighborhood_id', $filters['neighborhood_id'])
+                )
+            )
+            ->when(
+                filled($filters['bedrooms'] ?? null) && ($filters['bedrooms'] ?? null) !== 'all',
+                fn (Builder $q) => $q->whereHas('property', fn (Builder $p) =>
+                    $p->where('bedrooms', '>=', $filters['bedrooms'])
+                )
+            )
+            ->when($filters['q'] ?? null, fn (Builder $q, string $val) =>
+                $q->whereHas('property', fn (Builder $p) =>
+                    $p->where('title', 'ILIKE', "%{$val}%")
+                      ->orWhere('description', 'ILIKE', "%{$val}%")
+                      ->orWhere('address', 'ILIKE', "%{$val}%")
+                )
+            );
     }
 
-    public static function getAvailableListings(array $filters = [])
+    public function scopeWithFeatures(Builder $query, array $features): Builder
     {
-        $query = self::with(['property.city', 'property.neighborhood', 'property.coverImage', 'publisher:id,name'])
-            ->available()
-            ->withFilters($filters);
-            
-        // Filtros de property
-        if (!empty($filters['property_type'])) {
-            $query->whereHas('property', function ($q) use ($filters) {
-                $q->where('property_type', $filters['property_type']);
-            });
-        }
-        
-        if (!empty($filters['neighborhood_id']) && $filters['neighborhood_id'] !== 'all') {
-            $query->whereHas('property', function ($q) use ($filters) {
-                $q->where('neighborhood_id', $filters['neighborhood_id']);
-            });
-        }
-        
-        if (!empty($filters['bedrooms']) && $filters['bedrooms'] !== 'all') {
-            $query->whereHas('property', function ($q) use ($filters) {
-                $q->where('bedrooms', '=', $filters['bedrooms']);
-            });
-        }
-        
-        $listings = $query->orderBy('created_at', 'desc')->paginate(8);
-        
-        $listings->through(function ($listing) {
-            return [
-                'listing_id' => $listing->listing_id,
-                'operation_type' => $listing->operation_type,
-                'price' => $listing->price,
-                'currency' => $listing->currency,
-                'property_type' => $listing->property->property_type,
-                'address' => $listing->property->address,
-                'bedrooms' => $listing->property->bedrooms,
-                'bathrooms' => $listing->property->bathrooms,
-                'covered_m2' => $listing->property->covered_m2,
-                'amenities' => $listing->property->amenities,
-                'city_name' => $listing->property->city->name,
-                'neighborhood_name' => $listing->property->neighborhood?->name,
-                'publisher_name' => $listing->publisher->name,
-                'cover_image' => $listing->property->coverImage?->url,
-            ];
-        });
-        
-        return $listings;
+        $features = array_filter((array) $features);
+
+        return $query
+            ->when(in_array('garage', $features), fn (Builder $q) =>
+                $q->whereHas('property', fn (Builder $p) => $p->where('has_garage', true))
+            )
+            ->when(in_array('pool', $features), fn (Builder $q) =>
+                $q->whereHas('property', fn (Builder $p) => $p->whereJsonContains('amenities', 'piscina'))
+            )
+            ->when(in_array('air_conditioning', $features), fn (Builder $q) =>
+                $q->whereHas('property', fn (Builder $p) => $p->whereJsonContains('amenities', 'aire_acondicionado'))
+            )
+            ->when(in_array('furnished', $features), fn (Builder $q) =>
+                $q->whereHas('property', fn (Builder $p) => $p->whereJsonContains('amenities', 'amoblado'))
+            )
+            ->when(in_array('pets', $features), fn (Builder $q) =>
+                $q->where('allows_pets', true)
+            );
+    }
+
+    public function scopeWithSort(Builder $query, ?string $sort): Builder
+    {
+        return match ($sort) {
+            'price_asc' => $query->orderBy('price', 'asc'),
+            default     => $query->orderBy('created_at', 'desc'),
+        };
     }
 }

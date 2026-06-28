@@ -26,7 +26,20 @@ class ListingService
 
     public function search(array $filters): LengthAwarePaginator
     {
-        return Listing::getAvailableListings($filters);
+        $features = array_values(array_filter((array) ($filters['features'] ?? [])));
+
+        return Listing::with([
+            'property.city',
+            'property.neighborhood',
+            'property.coverImage',
+            'publisher:id,name',
+        ])
+            ->available()
+            ->withFilters($filters)
+            ->withFeatures($features)
+            ->withSort($filters['sort'] ?? null)
+            ->paginate(8)
+            ->through(fn (Listing $listing) => $this->formatListing($listing));
     }
 
     private function formatListing(Listing $listing): array

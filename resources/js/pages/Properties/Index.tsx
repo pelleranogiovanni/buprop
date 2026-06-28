@@ -51,6 +51,7 @@ interface Filters {
   bedrooms?: string
   q?: string
   sort?: string
+  features?: string[]
 }
 
 interface PropertiesIndexProps {
@@ -82,7 +83,9 @@ export default function PropertiesIndex({
 }: PropertiesIndexProps) {
   const [searchQuery, setSearchQuery] = useState(filters.q ?? '')
   const activeSort = filters.sort ?? 'newest'
-  const hasActiveFilters = Object.values(filters).some(Boolean)
+  const hasActiveFilters = Object.entries(filters).some(([, v]) =>
+    Array.isArray(v) ? v.length > 0 : Boolean(v)
+  )
   const sidebarRef = useRef<HTMLDivElement>(null)
 
   const handleSearch = () => {
@@ -186,7 +189,7 @@ export default function PropertiesIndex({
             className="flex w-full max-w-[1200px] items-start gap-6 px-6"
           >
             {/* FilterPanel sidebar */}
-            <FilterPanel initialFilters={filters} basePath="/properties" />
+            <FilterPanel initialFilters={filters} neighborhoods={neighborhoods} basePath="/properties" />
 
             {/* Results content */}
             <div className="flex min-w-0 flex-1 flex-col gap-5">

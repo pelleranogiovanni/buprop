@@ -25,7 +25,13 @@ class PropertyController extends Controller
             'max_price',
             'bedrooms',
             'q',
+            'sort',
         ]);
+
+        $features = array_values(array_filter((array) $request->input('features', [])));
+        if (!empty($features)) {
+            $filters['features'] = $features;
+        }
 
         return Inertia::render('Properties/Index', [
             'listings'      => $this->listingService->search($filters),
