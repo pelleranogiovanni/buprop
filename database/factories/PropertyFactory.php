@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\City;
 use App\Models\Neighborhood;
+use App\Models\Property;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -98,6 +99,20 @@ class PropertyFactory extends Factory
 
         $amenities = fake()->randomElements($baseAmenities[$propertyType], fake()->numberBetween(2, 5));
         return array_values(array_unique($amenities));
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Property $property) {
+            $urls = PropertyImageFactory::randomUrlsFor($property->property_type, rand(2, 4));
+            foreach ($urls as $i => $url) {
+                $property->images()->create([
+                    'url'        => $url,
+                    'sort_order' => $i + 1,
+                    'is_cover'   => $i === 0,
+                ]);
+            }
+        });
     }
 
     public function forUser(User $user): static

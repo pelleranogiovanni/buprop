@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\PropertyImageFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -262,6 +263,20 @@ class PropertySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            // Imágenes de la propiedad
+            $imageUrls = PropertyImageFactory::randomUrlsFor($property['property_type'], rand(2, 4));
+            foreach ($imageUrls as $i => $url) {
+                DB::table('property_images')->insert([
+                    'image_id'   => Str::uuid(),
+                    'property_id' => $propertyId,
+                    'url'        => $url,
+                    'sort_order' => $i + 1,
+                    'is_cover'   => $i === 0,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             // Crear listing para cada propiedad
             DB::table('listings')->insert([
